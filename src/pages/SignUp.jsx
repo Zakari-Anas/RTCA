@@ -72,7 +72,7 @@ const SignUp = () => {
          <>{firstname}</>
          <>{lastname}</>
 
-         aaaaaa
+         
         
          <>{phone.map((e)=>(
                 <div key={e.value}>
