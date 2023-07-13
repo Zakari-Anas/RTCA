@@ -4,9 +4,14 @@ import PhoneInput from 'react-phone-number-input'
 import { useState } from 'react'
 import './sass/SignUp.scss'
 import user from '../images/selectimage.jpg'
+import IntlTelInput from 'react-intl-tel-input';
+import 'react-intl-tel-input/dist/main.css';
+
+
 const SignUp = () => {
-        const [phone, setPhone] = useState()
-        const [name, setName] = useState()
+        const [phone, setPhone] = useState([])
+        const [firstname, setFirstName] = useState()
+        const [lasttname, setLastName] = useState()
         const [email, setEmail] = useState()
         const [password, setPassword] = useState()
         const [confirmPassword, setConfirmPassword] = useState()  
@@ -19,32 +24,34 @@ const SignUp = () => {
                 <a className='title'>Sign Up</a>
                     <form >
                         <div className='lastFirst'> 
-                            <input 
+                            <input  onChange={(e) => setFirstName(e.target.value)}
                                 type='text' 
                                 placeholder='FirstName'
                             />  
-                            <input 
+                            <input  onChange={(e) => setLastName(e.target.value)}
                                 type='text' 
                                 placeholder='LastName'
                             />
                         </div>
                        
-                        <input 
+                        <input onChange={(e) => setEmail(e.target.value)}
                             type='email '
                             placeholder='Email'
                         />
-                        <input 
+                        <input  onChange={(e) => setPassword(e.target.value)}
                             type='password'
                             placeholder='Password'
                         />
-                        <input 
+                        <input onChange={(e) => setConfirmPassword(e.target.value)}
                             type='password '
                             placeholder='Confirm Password'
                         />
-                        <PhoneInput
-                            placeholder="Enter phone number"
-                            value={phone}
-                            onChange={setPhone}
+                       <IntlTelInput  onPhoneNumberChange={(value, countryData, number, fullNumber) => {
+                                    
+                                    setPhone([{value,countryData,number, fullNumber}]);
+                                    }}
+                            containerClassName="intl-tel-input"
+                            inputClassName="form-control"
                         />
                         <input 
                             type='file'
@@ -59,8 +66,21 @@ const SignUp = () => {
                         <p>Already have an account?</p>
                     </form>
             </div>
-        </div>
+        </div> 
+
+        <>{email}</>
+         <>{firstname}</>
+        
+         <>{phone.map((e)=>(
+                <div key={e.value}>
+                        <p>{e.fullNumber}</p>
+                        
+                </div>
+            ))}</> 
+                                
     </div>
+
+   
   )
 }
 
