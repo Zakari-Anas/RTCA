@@ -11,7 +11,7 @@ import 'react-intl-tel-input/dist/main.css';
 const SignUp = () => {
         const [phone, setPhone] = useState([])
         const [firstname, setFirstName] = useState()
-        const [lasttname, setLastName] = useState()
+        const [lastname, setLastName] = useState()
         const [email, setEmail] = useState()
         const [password, setPassword] = useState()
         const [confirmPassword, setConfirmPassword] = useState()  
@@ -70,6 +70,7 @@ const SignUp = () => {
 
         <>{email}</>
          <>{firstname}</>
+         <>{lastname}</>
         
          <>{phone.map((e)=>(
                 <div key={e.value}>
