@@ -1,0 +1,129 @@
+
+body{
+   background-color: #acc;
+    margin: 0px;
+    padding: 0px;
+    font-family: 'Roboto', sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #212529;
+}
+.formContainer{
+    background-color: #acc;
+    height: 89vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    .formWrapper{    
+        background-color: white;
+        padding: 20px 60px;  
+        border-radius: 10px;
+        align-items: center;
+        flex-direction: column;
+        display: flex;
+        gap: 20px;
+        width: 50vh;
+        margin-top: 0px;
+      
+        display: flex;
+        // border: solid;
+        .logo{
+            color: purple;
+           
+             font-size: 30px;
+        }
+        .title{
+            color: purple;
+            font-size: 20px;
+            
+           
+        }
+       .SignUpF{
+        
+        gap: 40px;
+        display: flex;
+        flex-direction: column;
+        display: flex;
+            .lastfirst{
+                display: flex;
+                flex-direction: row;
+                input{
+                    margin:20px;
+                }
+            
+            }
+            input{
+                border:none;
+                border-bottom: 1px solid purple;
+                outline: none;
+                color: black;
+                &::placeholder {
+                    color: rgb(175,175,175);
+                    
+                }
+            }
+            button{
+                border: none;
+                cursor: pointer;
+                background-color: #5890FF;
+                border-radius: 5px;
+                height:42px;
+                font-weight: bold;
+                font-size: 25px;
+                color: white;
+               
+                
+            //    &:hover{
+                   
+            //        } 
+            }
+            p{
+                font-size: 12px;
+                margin-top: 0px;
+                color:#5d5b8d ;
+            }
+            .for{
+                display: flex;
+                cursor: pointer;
+                gap: 10px;
+                .Image{
+                    
+                    width: 32px; 
+                    height: 32px; 
+                    border-radius: 50%; 
+                    object-fit: cover; 
+                    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); 
+                }
+                .selectImage{
+                   
+                    display: inline-block;
+                    margin-left: 10px;
+                    margin-top: 0px;
+                    font-size: 20px;
+                    color: #5d5b8d;
+                }
+            }
+            .links{
+                display: flex;
+                margin-top: -25px;
+                align-self: center;
+                color: blue;
+                font-size: 12px;
+                &:hover{
+                    color: purple;
+                    text-decoration: underline;
+                }
+            }
+       
+           
+       }
+       .loginF{
+        gap: 40px;
+        display: flex;
+        flex-direction: row;
+        
+        
+       }
+    }
+}

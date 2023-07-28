@@ -1,0 +1,91 @@
+.x78zum5 {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-content: normal;
+    justify-content: normal;
+    align-items: normal
+}   
+.xe4j0kc {
+    border-top: solid 1px var(--secondary-button-background);
+}
+.x1i10hfl{
+    position: relative;
+    left:-500px;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.x1heor9g{
+    left:580px;
+    position: relative;
+    top: -10px;
+    background-color: rgb(4, 46, 198);
+    
+}
+.inp{
+    position: relative;
+    left:40px;
+   
+}
+.xe4j0kc{
+    position: relative;
+    left:300px;
+}
+.x1lliihq{
+    position: relative;
+    left: 25px;
+    top: 20px;
+
+}
+
+.a2{
+    color: #4a4848;
+   
+}
+
+.x1heor9g{
+    position: relative;
+    left: 590px;
+}
+.Form-Container{
+   
+    border-radius: 2px;
+    color: rgb(9, 10, 10);
+}
+
+.x3nfvp2{
+    left: 20px;
+    top: 8px;
+    position: relative;
+}
+.Container{
+    
+    .AjouterPost{
+             display: flex;
+            align-items: center;
+            justify-content: center;
+        .Form-Container{
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: center;    
+            border: 1px solid;
+            padding: 10px;
+                img {
+                width:40px;
+                height: 40px;
+                border-radius: 50%;
+                margin-left: 10px;
+            }
+            input{
+                width: 300px;
+                height: 40px;
+                border-radius: 10px;
+                border: none;
+                outline: none;
+                margin-left: 10px;
+            }
+        }
+        
+    }
+}

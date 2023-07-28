@@ -1,11 +1,10 @@
 import React from 'react'
-import 'react-phone-number-input/style.css'
-import PhoneInput from 'react-phone-number-input'
 import { useState } from 'react'
-import './sass/SignUp.scss'
-import user from '../images/selectimage.jpg'
-import IntlTelInput from 'react-intl-tel-input';
+import '../sass/SignUp&SignIn.scss'
+import user from '../images/img.png'
 import 'react-intl-tel-input/dist/main.css';
+import IntlTelInput from 'react-intl-tel-input';
+
 
 
 const SignUp = () => {
@@ -22,7 +21,7 @@ const SignUp = () => {
             <div className='formWrapper'>
                 <h1 className='logo'>Just Chatting</h1>
                 <a className='title'>Sign Up</a>
-                    <form >
+                    <form  className='SignUpF' >
                         <div className='lastFirst'> 
                             <input  onChange={(e) => setFirstName(e.target.value)}
                                 type='text' 
@@ -50,20 +49,25 @@ const SignUp = () => {
                                     
                                     setPhone([{value,countryData,number, fullNumber}]);
                                     }}
-                            containerClassName="intl-tel-input"
-                            inputClassName="form-control"
+                             containerClassName="intl-tel-input"
+                             inputClassName="form-control"
+                             name="mobile"
+                             placeholder="Enter Your Number" 
+                             input
+                             type="tel"
+                            //  value={this.state.phoneNumber}
                         />
                         <input 
                             type='file'
                             id='FileSelector'
                             style={{display:'none'}}
                         />
-                        <label htmlFor='FileSelector' > 
-                            <img src={user}/> 
-                            <span>Select image</span>
+                        <label className='for' htmlFor  ='FileSelector' > 
+                            <img src={user} className='Image'/> 
+                            <span className='selectImage'>Select image</span>
                         </label>
                         <button>Sign Up</button>
-                        <p>Already have an account?</p>
+                        <a className='links' href='/login'>Already have an account?</a>
                     </form>
             </div>
         </div> 
