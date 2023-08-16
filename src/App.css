@@ -1,15 +1,14 @@
-
 .navigation{
   display: flex;
   flex-direction: column;
-  
-  border-bottom: 1px solid purple;
+  outline: none;
+  /* border-bottom: 1px solid purple; */
   background-color: midnightblue;
   
 }.ul{
   display: flex;
   flex-direction: row;
-  gap: 40px;
+  gap: 20px;
   justify-content: left;
  
 }.li{
@@ -23,7 +22,7 @@
   border: solid;
   border-radius: 10px;
   background-color: #61dafb;
-  transition: 0.4s;
+  /* transition: 0.4s; */
 }a{
   text-decoration: none;
   color: white;

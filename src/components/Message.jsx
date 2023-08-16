@@ -1,15 +1,26 @@
-import React from 'react'
+import React, { useContext, useEffect, useRef } from 'react'
 import random from '../images/ranya.png'
-function Message() {
+import { auth } from '../Firebase'
+import { ChatContext } from '../context/ChatContext'
+function Message( {message}) {
+
+  const {data}=useContext(ChatContext)
+
+   const ref = useRef();
+
+  useEffect(() => {
+    ref.current?.scrollIntoView({ behavior: "smooth" });
+  }, [message]);
+
   return (
-    <div className='message'>
+    <div className={`message ${message.senderId===auth.currentUser.uid && 'owner'}`}>
         <div className='messageInfo'>
-          <img src={random}></img>
-          <span> Date </span>
+          <img src={message.senderId===auth.currentUser.uid? auth.currentUser.photoURL: data.user.photoURL}/>
+          <span> {message.Date} </span>
         </div>
         <div className='messageContent'>
-          <p>the message sent</p> 
-          <img src={random}></img>
+          <p>{message.text}</p> 
+             {message.img && <img src={message.img} alt="" />}
          </div>
     </div>
   )

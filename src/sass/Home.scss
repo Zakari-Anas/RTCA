@@ -1,4 +1,21 @@
+// Define mixins
+@mixin mobile {
+  @media screen and (max-width: 800px) {
+    @content;
+  }
+}
 
+@mixin tablet {
+  @media screen and (min-width: 801px) and (max-width: 1200px) {
+    @content;
+  }
+}
+
+@mixin laptop {
+  @media screen and (min-width: 1201px) {
+    @content;
+  }
+}   
 .Home{
     display: flex;
     width:800px;
@@ -9,24 +26,35 @@
     overflow: hidden;
     border-radius: 10px;
     justify-items: auto;
-      
+
+      @include mobile {
+            // flex-direction: column;
+            width: 100%;
+            margin-left: 0;
+        }
+        @include tablet {
+            width: 100%;
+            margin-left: 0;
+        }
     
      
     
     .Sidebar{
        flex: 1; 
        background-color: #5d5b8d;
-       
+    
        
        .Navbar{
         display: flex;
         padding: 10px;
         background-color: #2f2d52;
        
-        
+      
        
             #ProfilePic{
                 display: none;
+                  
+               
             }
 
         
@@ -44,11 +72,18 @@
                 margin-left: 10px;
                 width: 100px ;
                 color: lightgray;
-                // border: solid;
                 overflow: hidden;
                 text-overflow:ellipsis;
                 white-space: nowrap;
                 display: inline-block;
+                
+                 @include mobile {
+                        width: 100%;
+                }
+                @include tablet {
+                        width: 100%;
+                        
+                }
             }
             
            
@@ -59,6 +94,7 @@
                 display: flex;
                 flex-direction: column;
                 margin-top: 20px;
+                
                 
                 .Searchform{
                     display: flex;
@@ -88,6 +124,7 @@
                     flex-direction: row; 
                     align-items: center;
                     padding: 10px;
+                    
                     &:hover{
                         background-color: #2f2d52;
                     }
@@ -112,10 +149,29 @@
                         white-space: nowrap;
                         display: inline-block;
                     }
+                   
                 }
             }
+            .Chats::-webkit-scrollbar {
+            display: none;
+            }
+            /* Create a custom scroll bar thumb */
+            .Chats::-webkit-scrollbar-thumb {
+            background-color: #555555;
+            border-radius: 5px;
+            }
+
+            /* Optional: On hover, change the thumb color */
+            .Chats::-webkit-scrollbar-thumb:hover {
+            background-color: #888888;
+            }
+
             .Chats{
-                
+                height: 480px;
+                overflow-y: scroll;
+                scrollbar-width: thin; /* For Firefox, set the width of the scrollbar */
+                scrollbar-color: #555555 #f1f1f1; 
+
                 .userChat{
                     display: flex;
                     flex-direction: row;
@@ -137,7 +193,7 @@
                     }
                     span{
                         display: flex;
-                        margin-top: 5px;
+                        margin-top:40px;
                         margin-left: 10px;
                         width: 100px ;
                         font-size: 18px;
@@ -151,11 +207,11 @@
                     p{
                         
                         display: flex;
-                        margin-top: 5px;
+                        margin-top: 2px;
                         margin-left: 10px;
                         align-self: center;
                         width: 100px ; 
-                        font-size: 14px;
+                        font-size: 12px;
                         color: lightgray;
                     }
                 }
@@ -167,6 +223,7 @@
     .Chat{
         flex: 2;
         background-color: rgb(175,175,175);
+        
  
         
         .Info{
@@ -229,9 +286,21 @@
                     }
                 }
                 .messageContent{
-                    max-width: 80%;
+
                     display: flex;
                     flex-direction: column;
+                    max-width: 80%;
+                    gap: 10px;
+                    align-items: flex-start;
+                    
+                    
+                    
+                    p{
+                        background-color: white;
+                        border-radius: 10px;
+                        padding: 10px 20px;
+                        border-radius: 0px 10px 10px 10px;
+                    }
                     img{
                         width: 80%;
                         height: 80%;
@@ -240,7 +309,23 @@
                     }
 
                 }
+                &.owner{
+
+                    flex-direction: row-reverse;
+
+                    .messageContent{
+                        align-items: flex-end;
+                    }
+
+                    p{
+                        background-color: #8da4f1;
+                        color: white;
+                        border-radius: 10px 0px 10px 10px;
+                        max-width: max-content;
+                    }
+                }
             }
+            
         }   
         .input{
              height: 50px;
