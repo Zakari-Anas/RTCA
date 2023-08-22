@@ -9,9 +9,9 @@ import { ChatContext } from '../context/ChatContext';
 
 function Chats() {
   const [chats, setChats] = useState([]);
-const { dispatch } = useContext(ChatContext);
+  const { dispatch } = useContext(ChatContext);
   
-useEffect(() => {
+  useEffect(() => {
 
     const getChats = () => {
       if (auth.currentUser && auth.currentUser.uid) {
@@ -31,10 +31,7 @@ useEffect(() => {
   }, [auth.currentUser]);
 
 
-    const sortedChats = Object.entries(chats)?.sort((a, b) => {
-    // Assuming chatData.Date is a valid timestamp
-    return b[2]?.Date - a[1]?.Date;
-  });
+    
 
   
  const handleSelect = (u) => {
@@ -43,19 +40,24 @@ useEffect(() => {
 
 return (
   <div className='Chats'>
-    {sortedChats?.map(([chatId, chatData]) => (
-      <div className='userChat' key={chatId} onClick={() =>handleSelect(chatData.UserInfo)}>
-        
-        {chatData.UserInfo && chatData.UserInfo.photoURL &&(
-          <img src={chatData.UserInfo.photoURL} alt='User Avatar' />
-        ) }
-      
-        <div className='userChatInfo'>
-          <span>{chatData.UserInfo && chatData.UserInfo.displayName}</span>
-          <p>{chatData.lastMessage?.text}</p>
+    {Object.entries(chats)
+      ?.map(([chatId, chatData]) => chatData) // Extract chatData from the object
+      .sort((a, b) => {
+        const displayNameA = b.UserInfo && b.UserInfo.displayName ? b.UserInfo.displayName.toLowerCase() : '';
+        const displayNameB = a.UserInfo && a.UserInfo.displayName ? a.UserInfo.displayName.toLowerCase() : '';
+        return displayNameA.localeCompare(displayNameB); 
+      })
+      .map((chatData, index) => (
+        <div className='userChat' key={index} onClick={() => handleSelect(chatData.UserInfo)}>
+          {chatData.UserInfo && chatData.UserInfo.photoURL && (
+            <img src={chatData.UserInfo.photoURL} alt='User Avatar' />
+          )}
+          <div className='userChatInfo'>
+            <span>{chatData.UserInfo && chatData.UserInfo.displayName}</span>
+            {/* <p>{chatData.lastMessage?.text}</p> */}
+          </div>
         </div>
-      </div>
-    ))}
+      ))}
   </div>
 );
 

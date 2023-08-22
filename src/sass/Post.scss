@@ -1,91 +1,131 @@
-.x78zum5 {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: nowrap;
-    align-content: normal;
-    justify-content: normal;
-    align-items: normal
-}   
-.xe4j0kc {
-    border-top: solid 1px var(--secondary-button-background);
-}
-.x1i10hfl{
-    position: relative;
-    left:-500px;
-    -webkit-tap-highlight-color: transparent;
+/* Post.scss */
+
+.Container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
 }
 
-.x1heor9g{
-    left:580px;
-    position: relative;
-    top: -10px;
-    background-color: rgb(4, 46, 198);
-    
-}
-.inp{
-    position: relative;
-    left:40px;
-   
-}
-.xe4j0kc{
-    position: relative;
-    left:300px;
-}
-.x1lliihq{
-    position: relative;
-    left: 25px;
-    top: 20px;
-
+.AjouterPost {
+  width: 100%;
+  border-radius: 8px;
+  background-color: white;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
 }
 
-.a2{
-    color: #4a4848;
-   
+.Form-Container {
+  display: flex;
+  align-items: start;
+  gap: 10px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background-color: white;
+  width: 100%;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
 }
 
-.x1heor9g{
-    position: relative;
-    left: 590px;
-}
-.Form-Container{
-   
-    border-radius: 2px;
-    color: rgb(9, 10, 10);
+.inp {
+  flex: 1;
+  border: none;
+  outline: none;
+  font-size: 16px;
+  padding: 8px 10px;
 }
 
-.x3nfvp2{
-    left: 20px;
-    top: 8px;
-    position: relative;
+.profile {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+  cursor: pointer;
 }
-.Container{
-    
-    .AjouterPost{
-             display: flex;
-            align-items: center;
-            justify-content: center;
-        .Form-Container{
-            display: flex;
-            flex-direction: row;
-            align-items: center;
-            justify-content: center;    
-            border: 1px solid;
-            padding: 10px;
-                img {
-                width:40px;
-                height: 40px;
-                border-radius: 50%;
-                margin-left: 10px;
-            }
-            input{
-                width: 300px;
-                height: 40px;
-                border-radius: 10px;
-                border: none;
-                outline: none;
-                margin-left: 10px;
-            }
-        }
-        
-    }
+
+.video {
+  color: #1877f2;
+  cursor: pointer;
+  margin-left: 10px;
+}
+
+.close-button {
+  width: 18px;
+  height: 18px;
+  background-color: rgba(0, 0, 0, 0.6);
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  margin-left: 5px;
+}
+
+
+.posts {
+  margin-top: 20px;
+}
+
+.post {
+  background-color: white;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  margin-bottom: 20px;
+  border-radius: 8px;
+}
+
+.post-details {
+  display: flex;
+  align-items: center;
+}
+
+.posted-by {
+  font-weight: bold;
+  margin-right: 10px;
+}
+
+.post-text {
+  margin-top: 5px;
+}
+
+.posted-image {
+  width: 100%;
+  max-height: 400px;
+  object-fit: cover;
+  border-radius: 8px;
+  margin-top: 10px;
+}
+
+.like-dislike {
+  margin-top: 10px;
+}
+
+button {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  margin-right: 20px;
+}
+
+.comments {
+  margin-top: 20px;
+}
+
+.comment {
+  margin-top: 10px;
+  padding-top: 10px;
+  border-top: 1px solid #ccc;
+}
+
+.commented-by {
+  font-weight: bold;
+  margin-right: 10px;
+}
+
+.comment-text {
+  margin-top: 5px;
 }

@@ -9,6 +9,7 @@ import Login from './pages/Login';
 import SignUp from './pages/SignUp';
 import Home from './pages/Home';
 import Posts from './pages/Posts';
+import Profile from './components/Profile';
 import './App.css';
 
 
@@ -23,7 +24,8 @@ function App() {
             {auth.currentUser ? (    
               <> <li className='li'><Link to='/home'>Home</Link></li>
                 <li className='li'><Link onClick={() => signOut(auth)} to='logout'>Logout</Link></li>
-                <li className='li'><Link to='/Post'>Posts</Link></li></>
+                <li className='li'><Link to='/Post'>Posts</Link></li>
+                <li className='li'><Link to='/profile'>Profile</Link></li></>
                  ) : (<li className='li'><Link to="/login">Login</Link></li>)}
             
                 
@@ -37,6 +39,7 @@ function App() {
           <Route path='/home' element={currentUser ? <Home /> : <Login />} />
           <Route path='/logout' element={<Login />} />
           <Route path='/Post' element={currentUser ? <Posts /> : <Login />} />
+          <Route path='/profile' element={currentUser ? <Profile /> : <Login />} />
         </Routes>
       </Router>
     </div>

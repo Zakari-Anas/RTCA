@@ -9,10 +9,6 @@ import { auth } from "../Firebase";
 export const ChatContext = createContext();
 
 export const ChatContextProvider = ({ children }) => {
-
-
-  const { currentUser } = useContext(AuthContext);
-
   const INITIAL_STATE = {
     chatId: "null",
     user: {},
@@ -24,9 +20,9 @@ export const ChatContextProvider = ({ children }) => {
         return {
           user: action.payload,
           chatId:
-            currentUser.uid > action.payload.uid
-              ? currentUser.uid + action.payload.uid
-              : action.payload.uid +currentUser.uid,
+           auth.currentUser.uid > action.payload.uid
+              ? auth.currentUser.uid + action.payload.uid
+              : action.payload.uid + auth.currentUser.uid,
         };
 
       default:

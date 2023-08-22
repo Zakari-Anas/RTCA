@@ -3,15 +3,15 @@ import image from '../images/img.png'
 import Search from './Search'
 import { useContext } from 'react'
 import { AuthContext } from '../context/authContext'
+import { auth } from '../Firebase'
 
 function NavBar() {
-    const {currentUser} = useContext(AuthContext);
   return (
    <div className='Navbar'>
-      {currentUser ? (
+      {auth.currentUser ? (
         <>
-          <img src={currentUser.photoURL} alt="User Profile" />
-          <span className='Username'>{currentUser.displayName}</span>
+          <img src={auth.currentUser.photoURL} alt="User Profile" />
+          <span className='Username'>{auth.currentUser.displayName}</span>
         </>
       ) : (
         <span className='Username'>Guest</span>

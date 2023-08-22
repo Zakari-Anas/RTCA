@@ -19,7 +19,7 @@ const handleSubmit = async (e) => {
 
       signInWithEmailAndPassword(auth, email, password);
     // if (auth.currentUser) {
-      navigate('/home');
+      navigate('/posts');
     // } else {
     //   alert('Something went wrong');
     // }
