@@ -259,25 +259,11 @@ const handleDislike = async (postId) => {
 
     return (
       <div className='Container'>
-        <div className='AjouterPost'>
+        {/* <div className='AjouterPost'> */}
           <form className='Form-Container' type='submit'>
-          <div aria-label="Créer une publication"  role="region">
+          {/* <div aria-label="Créer une publication" className='pub'  role="region"> */}
             {/* <div className="x1cy8zhl x78zum5 x1iyjqo2 xs83m0k xh8yej3"> */}
-            <input
-              ref={inputRef}
-              type='text'
-              className='inp'
-              placeholder="What's on your mind, Anas"
-              value={inputValue}
-              onChange={(e) => setInputValue(e.target.value)}
-              onKeyDown={add}
-            />
-
-                <div
-                
-                  
-                >
-                  <div className="users_image">
+            <div className="users_image">
                     <a href="#"  onClick={handleTitleClick}>
                               <img
                                 height="4"
@@ -288,37 +274,43 @@ const handleDislike = async (postId) => {
                           
                               />
                               </a>
-                    </div>
-                      
-                      <div >
+            </div>
+                              <input
+                                ref={inputRef}
+                                type='text'
+                                className='inp'
+                                placeholder="What's on your mind, Anas"
+                                value={inputValue}
+                                onChange={(e) => setInputValue(e.target.value)}
+                                onKeyDown={add}
+                              />
                     
-                        <div className=" x78zum5 xl56j7k x1rfph6h x6ikm8r x10wlt62">
-  
-    <video ref={videoRef}  muted autoPlay  />
-    <div className="close-button" onClick={stopVideo}>
-
-      
-    </div>
-    <a href="#" className="x1 x1c4vz4f x2lah0s x1emribx" onClick={handleTitleClick}>
+     <div className=" x78zum5 xl56j7k x1rfph6h x6ikm8r x10wlt62">
+               <video ref={videoRef}  muted autoPlay  />
+               {/* <div className="close-button" onClick={stopVideo}> 
+    </div> */}
+    
+    {/* <a href="#" className="x1" onClick={handleTitleClick}>
                               <img
-                                height="4"
-                                width="4"
+                                height="16"
+                                width="14"
                                 alt=""
                                 className='im4'
                                 src="https://static.xx.fbcdn.net/rsrc.php/v3/yd/r/Y4mYLVOhTwq.png?_nc_eui2=AeE3OiHIcB4fLBpJ_rHbxxEbvPIN-OmHLJy88g346YcsnOnN58MWG55A_Gr-bVLFSXyGn13mMkgo-dhEwIFmvX8-"
                           
                               />
-                              </a>
-    <div className='vid'>
-    <span className='video' onClick={handleVideo}>
-      Vidéo en direct
-    </span>
-    </div>
+                              </a> */}
+              <div className='vid'>
+                      <span className='video' onClick={handleVideo}>
+                        Vidéo en direct
+                      </span>
+              </div>
+
   </div>
 
                   
                           <div className=" x78zum5 xl56j7k x1rfph6h x6ikm8r x10wlt62">
-                            <span className=" x1c4vz4f x2lah0s x1emribx">
+                            {/* <span className=" x1c4vz4f x2lah0s x1emribx">
                               <img
                                 height="14"
                                 width="14"
@@ -326,32 +318,35 @@ const handleDislike = async (postId) => {
                                 className='im2'
                                 src="https://static.xx.fbcdn.net/rsrc.php/v3/y7/r/Ivw7nhRtXyo.png?_nc_eui2=AeHOJV2F7UbRmAQwzgtkYvvLPL4YoeGsw5I8vhih4azDkljhMu9Y3PK_PRhJZ4Wqo1M-x3PlUexizUoXf_D8aCRq"
                               />
-                            </span>
+                            </span> */}
                         
                             <div>
-    <label htmlFor="fileInput" className="photo">
-      Photo / vidéo
-    </label>
-    <input
-    type="file"
-    id="fileInput"
-    accept=".jpg, .jpeg, .png, .gif, .bmp, .webp, .mp4, .avi, .mkv, .mov"
-    onChange={handleFileChange}
-    style={{ display: "none" }}
-  />
-    {selectedFile && (
-      <div>
-        <p>Selected File: {selectedFile.name}</p>
-        {selectedFile.type.startsWith("image") ? (
-          <img src={URL.createObjectURL(selectedFile)} alt="Selected File Preview" />
-        ) : (
-          <video controls>
-            <source src={URL.createObjectURL(selectedFile)} type={selectedFile.type} />
-            Your browser does not support the video tag.
-          </video>
-        )}
-      </div>
-    )}
+                    {/* <label htmlFor="fileInput" className="photo">
+                      Photo / vidéo
+                    </label> */}
+                    <label className='video' htmlFor="fileInput">
+        Photo / vidéo
+      </label>
+      <input
+        type="file"
+        id="fileInput"
+        accept=".jpg, .jpeg, .png, .gif, .bmp, .webp, .mp4, .avi, .mkv, .mov"
+        onChange={handleFileChange}
+        style={{ display: "none" }}
+      />
+      {selectedFile && (
+        <div>
+          <p>Selected File: {selectedFile.name}</p>
+          {selectedFile.type.startsWith("image") ? (
+            <img src={URL.createObjectURL(selectedFile)} alt="Selected File Preview" />
+          ) : (
+            <video controls>
+              <source src={URL.createObjectURL(selectedFile)} type={selectedFile.type} />
+              Your browser does not support the video tag.
+            </video>
+          )}
+        </div>
+      )}
   </div>
 
   </div>
@@ -477,12 +472,12 @@ const handleDislike = async (postId) => {
   
   </div>
                 )}
-                      </div>
-                    </div>
-                  </div>
+                      {/* </div>
+                    </div> */}
+                  {/* </div> */}
             
           </form>
-        </div>
+        {/* </div> */}
 
   <div className='Posts'>
     {data.map((Post) => (

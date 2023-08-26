@@ -8,15 +8,18 @@
   max-width: 600px;
   margin: 0 auto;
   padding: 20px;
+  background-color: #1877f2;
 }
-
-.AjouterPost {
-  width: 100%;
-  border-radius: 8px;
-  background-color: white;
-  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-  margin-bottom: 20px;
+body{
+  background-color: #8f141a;
 }
+// .AjouterPost {
+//   width: 80%;
+//   border-radius: 8px;
+//   background-color: rgb(57, 53, 53);
+//   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+//   margin-bottom: 20px;
+// }
 
 .Form-Container {
   display: flex;
@@ -25,25 +28,51 @@
   padding: 10px;
   border: 1px solid #ccc;
   border-radius: 8px;
-  background-color: white;
+  background-color: rgb(147, 43, 131);
   width: 100%;
+  height: 150px;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  position: relative;
+  top: 1%;
+}
+
+.pub{
+  background-color: rgb(81, 214, 33);
 }
 
 .inp {
-  flex: 1;
-  border: none;
-  outline: none;
+  // flex: 3;
+  // border: none;
+  // outline: none;
   font-size: 16px;
-  padding: 8px 10px;
+  padding: 10px 50px 10px 50px;
+  position: relative;
+  left: 20%;
+  // width: 300px;
 }
 
+.vid{
+  background-color: rgb(81, 214, 33);
+  width: 120px;
+  position: relative;
+  top: -40px;
+  left: 30%;
+}
+.photo{
+  background-color: rgb(81, 214, 33);
+  width: 250px;
+  position: relative;
+  top: 90px;
+  left: -1510%;
+}
 .profile {
   width: 40px;
   height: 40px;
   border-radius: 50%;
   object-fit: cover;
   cursor: pointer;
+  position: relative;
+  left: 150%;
 }
 
 .video {

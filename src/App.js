@@ -9,7 +9,7 @@ import Login from './pages/Login';
 import SignUp from './pages/SignUp';
 import Home from './pages/Home';
 import Posts from './pages/Posts';
-import Profile from './components/Profile';
+import Profil from './pages/profil';
 import './App.css';
 
 
@@ -25,7 +25,7 @@ function App() {
               <> <li className='li'><Link to='/home'>Home</Link></li>
                 <li className='li'><Link onClick={() => signOut(auth)} to='logout'>Logout</Link></li>
                 <li className='li'><Link to='/Post'>Posts</Link></li>
-                <li className='li'><Link to='/profile'>Profile</Link></li></>
+                <li className='li'><Link to='/Profil'>Profile</Link></li></>
                  ) : (<li className='li'><Link to="/login">Login</Link></li>)}
             
                 
@@ -39,7 +39,8 @@ function App() {
           <Route path='/home' element={currentUser ? <Home /> : <Login />} />
           <Route path='/logout' element={<Login />} />
           <Route path='/Post' element={currentUser ? <Posts /> : <Login />} />
-          <Route path='/profile' element={currentUser ? <Profile /> : <Login />} />
+          {/* <Route path='/profil' element={currentUser ? <Profil /> : <Login />} /> */}
+          <Route path='/profil' element={<Profil/>}/>
         </Routes>
       </Router>
     </div>
