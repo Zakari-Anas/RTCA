@@ -8,10 +8,11 @@
   max-width: 600px;
   margin: 0 auto;
   padding: 20px;
-  background-color: #1877f2;
+  background-color: #87a0c2;
 }
 body{
-  background-color: #8f141a;
+  background-color: #87a0c2;
+  overflow-x: hidden;
 }
 // .AjouterPost {
 //   width: 80%;
@@ -28,7 +29,7 @@ body{
   padding: 10px;
   border: 1px solid #ccc;
   border-radius: 8px;
-  background-color: rgb(147, 43, 131);
+  background-color: rgb(203, 218, 229);
   width: 100%;
   height: 150px;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
@@ -52,18 +53,48 @@ body{
 }
 
 .vid{
-  background-color: rgb(81, 214, 33);
-  width: 120px;
+  background-color: rgb(203, 218, 229);
+  width: 150px;
   position: relative;
   top: -40px;
   left: 30%;
 }
+.icvid{
+  position: relative;
+  top:5px;
+}
 .photo{
-  background-color: rgb(81, 214, 33);
+  background-color: rgb(203, 218, 229);
   width: 250px;
   position: relative;
   top: 90px;
   left: -1510%;
+}
+.icph{
+  position: relative;
+  top:5px;
+ 
+}
+.ichum{
+  position: relative;
+  top:5px;
+  left: -5%;
+
+}
+.phot{
+  background-color: rgb(203, 218, 229);
+  width: 150px;
+  position: relative;
+  left:-650px;
+  top: 115px;
+}
+.hum{
+  background-color: rgb(203, 218, 229);
+  width: 150px;
+  position: relative;
+  color: rgb(68, 117, 214);
+  left:-580px;
+  top: 116px;
 }
 .profile {
   width: 40px;
@@ -95,31 +126,137 @@ body{
 }
 
 
-.posts {
-  margin-top: 20px;
+.Posts {
+  margin-top: -40px;
+ 
+}
+.post{
+  width: 580px;
+}
+.post-text{
+  position: relative;
+  left: 90px;
 }
 
+// .posts-title {
+//   font-size: 32px; /* Taille de la police */
+//   color: #333; /* Couleur du texte */
+//   margin-top: 20px; /* Marge supérieure */
+//   text-decoration: underline;
+// }
+.posts-title {
+  font-size: 32px; /* Taille de la police */
+  color: #020202; /* Couleur du texte */
+  margin-top: 20px; /* Marge supérieure */
+  text-align: center; /* Centrer le texte */
+}
+
+.underline {
+  display: block;
+  text-align: center;
+  font-size: 16px; /* Taille de la police des lignes */
+  color: #050404; /* Couleur des lignes */
+  position: relative;
+  top: -20px;
+}
+.underline2 {
+  display: block;
+  text-align: center;
+  font-size: 16px; /* Taille de la police des lignes */
+  color: #050505; /* Couleur des lignes */
+  position: relative;
+  top: -40px;
+}
 .post {
-  background-color: white;
+  background-color: rgb(203, 218, 229);
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
   padding: 20px;
   margin-bottom: 20px;
   border-radius: 8px;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+  border: 1px solid #ccc;
 }
 
 .post-details {
   display: flex;
   align-items: center;
+  flex-direction: column;
+  margin-bottom: 10px;
 }
 
 .posted-by {
   font-weight: bold;
   margin-right: 10px;
+  font-size: 14px;
+  color: #333;
+  margin: 0;
+}
+.lik{
+  position: relative;
+  left: 60px;
+}
+.dis{
+  position: relative;
+  left: 300px;
+}
+.post-text {
+  font-size: 20px;
+  margin: 5px 0;
+  line-height: 1.4;
+  color: #333333;
+  position: relative;
+  left: 0px;
 }
 
-.post-text {
-  margin-top: 5px;
+.post-text:before {
+  content: open-quote;
+  font-size: 24px;
+  margin-right: 5px;
+  vertical-align: middle;
 }
+
+.post-text:after {
+  content: close-quote;
+  font-size: 24px;
+  margin-left: 5px;
+  vertical-align: middle;
+}
+
+.post-text em {
+  font-style: italic;
+  color: #e74c3c;
+}
+
+.post-text strong {
+  font-weight: bold;
+}
+
+.post-text a {
+  color: #3498db;
+  text-decoration: underline;
+}
+
+.post-text a:hover {
+  color: #2980b9;
+  text-decoration: none;
+}
+
+.post-text ul,
+.post-text ol {
+  padding-left: 20px;
+}
+
+.post-text li {
+  margin-bottom: 5px;
+}
+
+.post-text img {
+  max-width: 100%;
+  border-radius: 5px;
+  margin-top: 10px;
+}
+
+
 
 .posted-image {
   width: 100%;
@@ -130,20 +267,48 @@ body{
 }
 
 .like-dislike {
-  margin-top: 10px;
+  // margin-top: 10px;
+  display: flex;
+  gap: 10px;
+  margin-bottom: 10px;
 }
 
 button {
-  background-color: transparent;
+  // background-color: transparent;
   border: none;
   cursor: pointer;
   margin-right: 20px;
+  background-color: #3498db;
+  color: #fff;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
 }
-
+button:hover {
+  background-color: #2980b9;
+}
+.posted-image {
+  max-width: 100%;
+  border-radius: 5px;
+  margin-bottom: 10px;
+}
+.input1 {
+  width: 100%;
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin-bottom: 10px;
+  font-size: 16px;
+}
+// .comments {
+//   margin-top: 20px;
+// }
 .comments {
-  margin-top: 20px;
+  border-top: 1px solid #ccc;
+  padding-top: 10px;
 }
-
 .comment {
   margin-top: 10px;
   padding-top: 10px;
@@ -153,8 +318,13 @@ button {
 .commented-by {
   font-weight: bold;
   margin-right: 10px;
+  font-size: 14px;
+  color: #555;
+  margin: 0;
 }
 
 .comment-text {
   margin-top: 5px;
+  font-size: 14px;
+  margin: 5px 0;
 }

@@ -7,7 +7,7 @@
   import { db } from '../Firebase';
   import {v4 as uuid} from 'uuid';
   import { getDownloadURL, ref, uploadBytesResumable } from 'firebase/storage'
-
+  // import { faLaughSquint } from '@fortawesome/free-solid-svg-icons';
 
 
 
@@ -301,6 +301,14 @@ const handleDislike = async (postId) => {
                               />
                               </a> */}
               <div className='vid'>
+              <img
+        height="24"
+        width="24"
+        alt="Humor Icon"
+        referrerPolicy="origin-when-cross-origin"
+        className='icvid'
+        src="https://static.xx.fbcdn.net/rsrc.php/v3/yF/r/v1iF2605Cb5.png?_nc_eui2=AeG8W8NaPoS6jb021C9FqjUw3Eh3Wgl8GJPcSHdaCXwYk76pwsrwkf3LjoVOnxBfXEC-2cPj6qU4GzYQvl09Bl_W"
+      />
                       <span className='video' onClick={handleVideo}>
                         Vidéo en direct
                       </span>
@@ -320,10 +328,18 @@ const handleDislike = async (postId) => {
                               />
                             </span> */}
                         
-                            <div>
+                            <div className='phot'>
                     {/* <label htmlFor="fileInput" className="photo">
                       Photo / vidéo
                     </label> */}
+                        <img
+        height="24"
+        width="24"
+        alt="Humor Icon"
+        referrerPolicy="origin-when-cross-origin"
+        className='icph'
+        src="https://static.xx.fbcdn.net/rsrc.php/v3/yC/r/a6OjkIIE-R0.png?_nc_eui2=AeHSOL2pyMqjBbCQuGcbjk6CfK5Z1qDG7FV8rlnWoMbsVfWQrHTxe2kGqH2oS57isYQ11zMKkiGuJdD52_DFCLZK"
+      />
                     <label className='video' htmlFor="fileInput">
         Photo / vidéo
       </label>
@@ -352,21 +368,31 @@ const handleDislike = async (postId) => {
   </div>
 
                       <div className='span1'>
-                          <div className=" x78zum5 xl56j7k x1rfph6h x6ikm8r x10wlt62">
+                          {/* <div className=" x78zum5 xl56j7k x1rfph6h x6ikm8r x10wlt62">
                             <div className='im1'><span className=" x1c4vz4f x2lah0s x1emribx">
                               <img
                                 height="14"
                                 width="14"
                                 alt=""
-                              
+    
                                 src="https://static.xx.fbcdn.net/rsrc.php/v3/yd/r/Y4mYLVOhTwq.png?_nc_eui2=AeE3OiHIcB4fLBpJ_rHbxxEbvPIN-OmHLJy88g346YcsnOnN58MWG55A_Gr-bVLFSXyGn13mMkgo-dhEwIFmvX8-"
                               />
                             </span></div>
-                            </div>
+                            </div> */}
+                            <div className='hum'>
+                            <img
+        height="24"
+        width="24"
+        alt="Humor Icon"
+        className='ichum'
+        referrerPolicy="origin-when-cross-origin"
+        src="https://static.xx.fbcdn.net/rsrc.php/v3/yk/r/yMDS19UDsWe.png?_nc_eui2=AeF0NcBU1UonARiB7seCq1jxv2_PAiqLvPK_b88CKou88jIeF2uOnHXbcCFv1ABWbKrnjERaMDCPKYRu3HoBblpD"
+      />
+                            {/* <FontAwesomeIcon icon={faLaughSquint} size="3x" /> */}
                             <span className="humour" onClick={handleEmojisClick}>
                 Humeur / activité
               </span>
-                </div>
+                
                 
                 {showEmojis && (
                   
@@ -469,17 +495,24 @@ const handleDislike = async (postId) => {
     <span role="img" aria-label="Emoji 4" onClick={() => handleEmojiClick('🦪')}>🦪</span>
      
 
-  
   </div>
+ 
                 )}
+                 </div>
+  </div>
                       {/* </div>
                     </div> */}
                   {/* </div> */}
             
           </form>
         {/* </div> */}
-
+        <h1 className="posts-title">
+        <span>Posts</span>
+        <span className="underline">____________</span>
+        <span className="underline2">____________</span>
+      </h1>
   <div className='Posts'>
+    <div className='post1'>
     {data.map((Post) => (
       <div key={Post.id} className='post'>
         <div className='post-details'>
@@ -487,15 +520,15 @@ const handleDislike = async (postId) => {
           <p className='post-text'>{Post.text}</p>
         </div>
             <div className='like-dislike'>
-                  <button onClick={() => handleLike(Post.id)}>
-                    Like ({Post.likesCount})
+                  <button className='lik' onClick={() => handleLike(Post.id)}>
+                  <span role='img' aria-label='Like'>👍</span>  Like ({Post.likesCount})
                   </button>
-                  <button onClick={() => handleDislike(Post.id)}>
-                    Dislike ({Post.dislikesCount})
+                  <button className='dis' onClick={() => handleDislike(Post.id)}>
+                  <span role='img' aria-label='Dislike' >👎</span> Dislike ({Post.dislikesCount})
                   </button>
             </div>
         {Post.img && <img src={Post.img} alt='Posted' className='posted-image' />}
-        <input onKeyDown={(e) => add2(e, Post)} placeholder='Comment' />
+        <input onKeyDown={(e) => add2(e, Post)} placeholder='Comment' className='input1' />
         
         {Post.comments && (
           <div className='comments'>
@@ -508,7 +541,9 @@ const handleDislike = async (postId) => {
           </div>
         )}
       </div>
+      
     ))}
+    </div>
   </div>
       </div>
     );
