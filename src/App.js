@@ -39,7 +39,6 @@ function App() {
           <Route path='/home' element={currentUser ? <Home /> : <Login />} />
           <Route path='/logout' element={<Login />} />
           <Route path='/Post' element={currentUser ? <Posts /> : <Login />} />
-          {/* <Route path='/profil' element={currentUser ? <Profil /> : <Login />} /> */}
           <Route path='/profil' element={<Profil/>}/>
         </Routes>
       </Router>

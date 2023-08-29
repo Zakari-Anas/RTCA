@@ -126,6 +126,7 @@
       if (e.key === 'Enter') {
         e.preventDefault();
         ajouter();
+        e.target.value = '';
       }
     }
 
@@ -152,7 +153,7 @@
 
         // Add the user's like to the likes subcollection of the specific post
         await addDoc(collection(db, `Posts/${postId}/likes`), {
-          userId: auth.currentUser.uid,
+          
         });
       }
     );
@@ -169,7 +170,7 @@
 
     // Add the user's like to the likes subcollection of the specific post
     await addDoc(collection(db, `Posts/${postId}/likes`), {
-          userId: auth.currentUser.uid,
+          
         });
   }
 };
@@ -270,7 +271,7 @@ const handleDislike = async (postId) => {
                                 width="4"
                                 alt=""
                                 className='profile'
-                                src={userImage}
+                                src={auth.currentUser ? auth.currentUser.photoURL : ''}
                           
                               />
                               </a>
@@ -279,7 +280,7 @@ const handleDislike = async (postId) => {
                                 ref={inputRef}
                                 type='text'
                                 className='inp'
-                                placeholder="What's on your mind, Anas"
+                                placeholder= {auth.currentUser ? `What's on your mind, ${auth.currentUser.displayName} ?` : "What's on your mind ?"} 
                                 value={inputValue}
                                 onChange={(e) => setInputValue(e.target.value)}
                                 onKeyDown={add}
@@ -287,19 +288,7 @@ const handleDislike = async (postId) => {
                     
      <div className=" x78zum5 xl56j7k x1rfph6h x6ikm8r x10wlt62">
                <video ref={videoRef}  muted autoPlay  />
-               {/* <div className="close-button" onClick={stopVideo}> 
-    </div> */}
-    
-    {/* <a href="#" className="x1" onClick={handleTitleClick}>
-                              <img
-                                height="16"
-                                width="14"
-                                alt=""
-                                className='im4'
-                                src="https://static.xx.fbcdn.net/rsrc.php/v3/yd/r/Y4mYLVOhTwq.png?_nc_eui2=AeE3OiHIcB4fLBpJ_rHbxxEbvPIN-OmHLJy88g346YcsnOnN58MWG55A_Gr-bVLFSXyGn13mMkgo-dhEwIFmvX8-"
-                          
-                              />
-                              </a> */}
+   
               <div className='vid'>
               <img
         height="24"
@@ -318,20 +307,10 @@ const handleDislike = async (postId) => {
 
                   
                           <div className=" x78zum5 xl56j7k x1rfph6h x6ikm8r x10wlt62">
-                            {/* <span className=" x1c4vz4f x2lah0s x1emribx">
-                              <img
-                                height="14"
-                                width="14"
-                                alt=""
-                                className='im2'
-                                src="https://static.xx.fbcdn.net/rsrc.php/v3/y7/r/Ivw7nhRtXyo.png?_nc_eui2=AeHOJV2F7UbRmAQwzgtkYvvLPL4YoeGsw5I8vhih4azDkljhMu9Y3PK_PRhJZ4Wqo1M-x3PlUexizUoXf_D8aCRq"
-                              />
-                            </span> */}
+                      
                         
                             <div className='phot'>
-                    {/* <label htmlFor="fileInput" className="photo">
-                      Photo / vidéo
-                    </label> */}
+           
                         <img
         height="24"
         width="24"
@@ -368,17 +347,7 @@ const handleDislike = async (postId) => {
   </div>
 
                       <div className='span1'>
-                          {/* <div className=" x78zum5 xl56j7k x1rfph6h x6ikm8r x10wlt62">
-                            <div className='im1'><span className=" x1c4vz4f x2lah0s x1emribx">
-                              <img
-                                height="14"
-                                width="14"
-                                alt=""
-    
-                                src="https://static.xx.fbcdn.net/rsrc.php/v3/yd/r/Y4mYLVOhTwq.png?_nc_eui2=AeE3OiHIcB4fLBpJ_rHbxxEbvPIN-OmHLJy88g346YcsnOnN58MWG55A_Gr-bVLFSXyGn13mMkgo-dhEwIFmvX8-"
-                              />
-                            </span></div>
-                            </div> */}
+                   
                             <div className='hum'>
                             <img
         height="24"
@@ -388,7 +357,6 @@ const handleDislike = async (postId) => {
         referrerPolicy="origin-when-cross-origin"
         src="https://static.xx.fbcdn.net/rsrc.php/v3/yk/r/yMDS19UDsWe.png?_nc_eui2=AeF0NcBU1UonARiB7seCq1jxv2_PAiqLvPK_b88CKou88jIeF2uOnHXbcCFv1ABWbKrnjERaMDCPKYRu3HoBblpD"
       />
-                            {/* <FontAwesomeIcon icon={faLaughSquint} size="3x" /> */}
                             <span className="humour" onClick={handleEmojisClick}>
                 Humeur / activité
               </span>
@@ -398,114 +366,111 @@ const handleDislike = async (postId) => {
                   
                   <div className="emoji-container">
   
-  <button className="close-button1" onClick={handleCloseClick}>❌</button>
-    <span role="img" aria-label="Emoji 1" onClick={() => handleEmojiClick('😀')}>😀</span>
-    <span role="img" aria-label="Emoji 2" onClick={() => handleEmojiClick('😂')}>😂</span>
-    <span role="img" aria-label="Emoji 3" onClick={() => handleEmojiClick('😃')}>😃</span>
-    <span role="img" aria-label="Emoji 4" onClick={() => handleEmojiClick('😄')}>😄</span>
-    <span role="img" aria-label="Emoji 5" onClick={() => handleEmojiClick('😅')}>😅</span>
-    <span role="img" aria-label="Emoji 6" onClick={() => handleEmojiClick('😆')}>😆</span>
-    <span role="img" aria-label="Emoji 7" onClick={() => handleEmojiClick('😉')}>😉</span>
-    <span role="img" aria-label="Emoji 8" onClick={() => handleEmojiClick('😊')}>😊</span>
-    <span role="img" aria-label="Emoji 9" onClick={() => handleEmojiClick('😋')}>😋</span>
-    <span role="img" aria-label="Emoji 10" onClick={() => handleEmojiClick('😎')}>😎</span>
-    <span role="img" aria-label="Emoji 11" onClick={() => handleEmojiClick('😍')}>😍</span>
-    <span role="img" aria-label="Emoji 12" onClick={() => handleEmojiClick('😘')}>😘</span>
-    <span role="img" aria-label="Emoji 13" onClick={() => handleEmojiClick('🥰')}>🥰</span>
-    <span role="img" aria-label="Emoji 14" onClick={() => handleEmojiClick('😗')}>😗</span>
-    <span role="img" aria-label="Emoji 15"onClick={() => handleEmojiClick('😙')}>😙</span>
-    <span role="img" aria-label="Emoji 16"onClick={() => handleEmojiClick('😀')}>😚</span>
-    <span role="img" aria-label="Emoji 17" onClick={() => handleEmojiClick('🤗')}>🤗</span>
-    <span role="img" aria-label="Emoji 17" onClick={() => handleEmojiClick('👰‍♀️')}>👰‍♀️</span>
-    <span role="img" aria-label="Emoji 1" onClick={() => handleEmojiClick('👰‍♀️')}>👰</span>
-    <span role="img" aria-label="Emoji 2" onClick={() => handleEmojiClick('👨‍🦲')}>👨‍🦲</span>
-    <span role="img" aria-label="Emoji 3" onClick={() => handleEmojiClick('👨‍🚀')}>👨‍🚀</span>
-    <span role="img" aria-label="Emoji 4" onClick={() => handleEmojiClick('🦄')}>🦄</span>
-    <span role="img" aria-label="Emoji 5" onClick={() => handleEmojiClick('🐴')}>🐴</span>
-    <span role="img" aria-label="Emoji 6" onClick={() => handleEmojiClick('🐗')}>🐗</span>
-    <span role="img" aria-label="Emoji 7" onClick={() => handleEmojiClick('🐺')}>🐺</span>
-    <span role="img" aria-label="Emoji 8" onClick={() => handleEmojiClick('🐠')}>🐠</span>
-    <span role="img" aria-label="Emoji 9" onClick={() => handleEmojiClick('🐡')}>🐡</span>
-    <span role="img" aria-label="Emoji 10" onClick={() => handleEmojiClick('🌩️')}>🌩️</span>
-    <span role="img" aria-label="Emoji 11" onClick={() => handleEmojiClick('⛈️')}>⛈️</span>
-    <span role="img" aria-label="Emoji 12" onClick={() => handleEmojiClick('🌧️')}>🌧️</span>
-    <span role="img" aria-label="Emoji 13" onClick={() => handleEmojiClick('🌦️')}>🌦️</span>
-    <span role="img" aria-label="Emoji 14" onClick={() => handleEmojiClick('🐚')}>🐚</span>
-    <span role="img" aria-label="Emoji 15"onClick={() => handleEmojiClick('🌷')}>🌷</span>
-    <span role="img" aria-label="Emoji 16"onClick={() => handleEmojiClick('🌹')}>🌹</span>
-    <span role="img" aria-label="Emoji 17" onClick={() => handleEmojiClick('🐣')}>🐣</span>
+                        <button className="close-button1" onClick={handleCloseClick}>❌</button>
+                        <span role="img" aria-label="Emoji 1" onClick={() => handleEmojiClick('😀')}>😀</span>
+                        <span role="img" aria-label="Emoji 2" onClick={() => handleEmojiClick('😂')}>😂</span>
+                        <span role="img" aria-label="Emoji 3" onClick={() => handleEmojiClick('😃')}>😃</span>
+                        <span role="img" aria-label="Emoji 4" onClick={() => handleEmojiClick('😄')}>😄</span>
+                        <span role="img" aria-label="Emoji 5" onClick={() => handleEmojiClick('😅')}>😅</span>
+                        <span role="img" aria-label="Emoji 6" onClick={() => handleEmojiClick('😆')}>😆</span>
+                        <span role="img" aria-label="Emoji 7" onClick={() => handleEmojiClick('😉')}>😉</span>
+                        <span role="img" aria-label="Emoji 8" onClick={() => handleEmojiClick('😊')}>😊</span>
+                        <span role="img" aria-label="Emoji 9" onClick={() => handleEmojiClick('😋')}>😋</span>
+                        <span role="img" aria-label="Emoji 10" onClick={() => handleEmojiClick('😎')}>😎</span>
+                        <span role="img" aria-label="Emoji 11" onClick={() => handleEmojiClick('😍')}>😍</span>
+                        <span role="img" aria-label="Emoji 12" onClick={() => handleEmojiClick('😘')}>😘</span>
+                        <span role="img" aria-label="Emoji 13" onClick={() => handleEmojiClick('🥰')}>🥰</span>
+                        <span role="img" aria-label="Emoji 14" onClick={() => handleEmojiClick('😗')}>😗</span>
+                        <span role="img" aria-label="Emoji 15"onClick={() => handleEmojiClick('😙')}>😙</span>
+                        <span role="img" aria-label="Emoji 16"onClick={() => handleEmojiClick('😀')}>😚</span>
+                        <span role="img" aria-label="Emoji 17" onClick={() => handleEmojiClick('🤗')}>🤗</span>
+                        <span role="img" aria-label="Emoji 17" onClick={() => handleEmojiClick('👰‍♀️')}>👰‍♀️</span>
+                        <span role="img" aria-label="Emoji 1" onClick={() => handleEmojiClick('👰‍♀️')}>👰</span>
+                        <span role="img" aria-label="Emoji 2" onClick={() => handleEmojiClick('👨‍🦲')}>👨‍🦲</span>
+                        <span role="img" aria-label="Emoji 3" onClick={() => handleEmojiClick('👨‍🚀')}>👨‍🚀</span>
+                        <span role="img" aria-label="Emoji 4" onClick={() => handleEmojiClick('🦄')}>🦄</span>
+                        <span role="img" aria-label="Emoji 5" onClick={() => handleEmojiClick('🐴')}>🐴</span>
+                        <span role="img" aria-label="Emoji 6" onClick={() => handleEmojiClick('🐗')}>🐗</span>
+                        <span role="img" aria-label="Emoji 7" onClick={() => handleEmojiClick('🐺')}>🐺</span>
+                        <span role="img" aria-label="Emoji 8" onClick={() => handleEmojiClick('🐠')}>🐠</span>
+                        <span role="img" aria-label="Emoji 9" onClick={() => handleEmojiClick('🐡')}>🐡</span>
+                        <span role="img" aria-label="Emoji 10" onClick={() => handleEmojiClick('🌩️')}>🌩️</span>
+                        <span role="img" aria-label="Emoji 11" onClick={() => handleEmojiClick('⛈️')}>⛈️</span>
+                        <span role="img" aria-label="Emoji 12" onClick={() => handleEmojiClick('🌧️')}>🌧️</span>
+                        <span role="img" aria-label="Emoji 13" onClick={() => handleEmojiClick('🌦️')}>🌦️</span>
+                        <span role="img" aria-label="Emoji 14" onClick={() => handleEmojiClick('🐚')}>🐚</span>
+                        <span role="img" aria-label="Emoji 15"onClick={() => handleEmojiClick('🌷')}>🌷</span>
+                        <span role="img" aria-label="Emoji 16"onClick={() => handleEmojiClick('🌹')}>🌹</span>
+                        <span role="img" aria-label="Emoji 17" onClick={() => handleEmojiClick('🐣')}>🐣</span>
+                        <span role="img" aria-label="Emoji 1" onClick={() => handleEmojiClick('🐦')}>🐦</span>
+                        <span role="img" aria-label="Emoji 2" onClick={() => handleEmojiClick('🐸')}>🐸</span>
+                        <span role="img" aria-label="Emoji 3" onClick={() => handleEmojiClick('🐽')}>🐽</span>
+                        <span role="img" aria-label="Emoji 4" onClick={() => handleEmojiClick('🐷')}>🐷</span>
+                        <span role="img" aria-label="Emoji 5" onClick={() => handleEmojiClick('🐮')}>🐮</span>
+                        <span role="img" aria-label="Emoji 6" onClick={() => handleEmojiClick('🦁')}>🦁</span>
+                        <span role="img" aria-label="Emoji 7" onClick={() => handleEmojiClick('🐯')}>🐯</span>
+                        <span role="img" aria-label="Emoji 8" onClick={() => handleEmojiClick('🐨')}>🐨</span>
+                        <span role="img" aria-label="Emoji 9" onClick={() => handleEmojiClick('🐻‍❄️')}>🐻‍❄️</span>
+                        <span role="img" aria-label="Emoji 10" onClick={() => handleEmojiClick('🐼')}>🐼</span>
+                        <span role="img" aria-label="Emoji 11" onClick={() => handleEmojiClick('🐻')}>🐻</span>
+                        <span role="img" aria-label="Emoji 12" onClick={() => handleEmojiClick('🦊')}>🦊</span>
+                        <span role="img" aria-label="Emoji 13" onClick={() => handleEmojiClick('🐰')}>🐰</span>
+                        <span role="img" aria-label="Emoji 14" onClick={() => handleEmojiClick('🐹')}>🐹</span>
+                        <span role="img" aria-label="Emoji 15"onClick={() => handleEmojiClick('🐭')}>🐭</span>
+                        <span role="img" aria-label="Emoji 16"onClick={() => handleEmojiClick('🐱')}>🐱</span>
+                        <span role="img" aria-label="Emoji 17" onClick={() => handleEmojiClick('🐶')}>🐶</span>
+                        <span role="img" aria-label="Emoji 17" onClick={() => handleEmojiClick('🐺')}>🐺</span>
+                        <span role="img" aria-label="Emoji 1" onClick={() => handleEmojiClick('🐗')}>🐗</span>
+                        <span role="img" aria-label="Emoji 2" onClick={() => handleEmojiClick('🐴')}>🐴</span>
+                        <span role="img" aria-label="Emoji 3" onClick={() => handleEmojiClick('🦄')}>🦄</span>
+                        <span role="img" aria-label="Emoji 4" onClick={() => handleEmojiClick('🐝')}>🐝</span>
+                        <span role="img" aria-label="Emoji 5" onClick={() => handleEmojiClick('🐛')}>🐛</span>
+                        <span role="img" aria-label="Emoji 6" onClick={() => handleEmojiClick('🦋')}>🦋</span>
+                        <span role="img" aria-label="Emoji 7" onClick={() => handleEmojiClick('🐌')}>🐌</span>
+                        <span role="img" aria-label="Emoji 8" onClick={() => handleEmojiClick('🐞')}>🐞</span>
+                        <span role="img" aria-label="Emoji 9" onClick={() => handleEmojiClick('🐜')}>🐜</span>
+                        <span role="img" aria-label="Emoji 10" onClick={() => handleEmojiClick('🦗')}>🦗</span>
+                        <span role="img" aria-label="Emoji 11" onClick={() => handleEmojiClick('🕷️')}>🕷️</span>
+                        <span role="img" aria-label="Emoji 12" onClick={() => handleEmojiClick('🦂')}>🦂</span>
+                        <span role="img" aria-label="Emoji 13" onClick={() => handleEmojiClick('🦟')}>🦟</span>
+                        <span role="img" aria-label="Emoji 14" onClick={() => handleEmojiClick('🦠')}>🦠</span>
+                        <span role="img" aria-label="Emoji 15"onClick={() => handleEmojiClick('🌸')}>🌸</span>
+                        <span role="img" aria-label="Emoji 16"onClick={() => handleEmojiClick('💐')}>💐</span>
+                        <span role="img" aria-label="Emoji 17" onClick={() => handleEmojiClick('🌹')}>🌹</span>
+                        <span role="img" aria-label="Emoji 17" onClick={() => handleEmojiClick('🌺')}>🌺</span>
+                        <span role="img" aria-label="Emoji 1" onClick={() => handleEmojiClick('🌻')}>🌻</span>
+                        <span role="img" aria-label="Emoji 2" onClick={() => handleEmojiClick('🌼')}>🌼</span>
+                        <span role="img" aria-label="Emoji 3" onClick={() => handleEmojiClick('🌷')}>🌷</span>
+                        <span role="img" aria-label="Emoji 4" onClick={() => handleEmojiClick('🌱')}>🌱</span>
+                        <span role="img" aria-label="Emoji 5" onClick={() => handleEmojiClick('🌲')}>🌲</span>
+                        <span role="img" aria-label="Emoji 6" onClick={() => handleEmojiClick('🌳')}>🌳</span>
+                        <span role="img" aria-label="Emoji 7" onClick={() => handleEmojiClick('🌴')}>🌴</span>
+                        <span role="img" aria-label="Emoji 8" onClick={() => handleEmojiClick('🌵')}>🌵</span>
+                        <span role="img" aria-label="Emoji 9" onClick={() => handleEmojiClick('🌾')}>🌾</span>
+                        <span role="img" aria-label="Emoji 10" onClick={() => handleEmojiClick('🌿')}>🌿</span>
+                        <span role="img" aria-label="Emoji 11" onClick={() => handleEmojiClick('☘️')}>☘️</span>
+                        <span role="img" aria-label="Emoji 12" onClick={() => handleEmojiClick('🍀')}>🍀</span>
+                        <span role="img" aria-label="Emoji 13" onClick={() => handleEmojiClick('🍁')}>🍁</span>
+                        <span role="img" aria-label="Emoji 14" onClick={() => handleEmojiClick('🍂')}>🍂</span>
+                        <span role="img" aria-label="Emoji 15"onClick={() => handleEmojiClick('🍃')}>🍃</span>
+                        <span role="img" aria-label="Emoji 16"onClick={() => handleEmojiClick('🍄')}>🍄</span>
+                        <span role="img" aria-label="Emoji 17" onClick={() => handleEmojiClick('🌰')}>🌰</span>
+                        <span role="img" aria-label="Emoji 17" onClick={() => handleEmojiClick('🦀')}>🦀</span>
+                        <span role="img" aria-label="Emoji 1" onClick={() => handleEmojiClick('🦞')}>🦞</span>
+                        <span role="img" aria-label="Emoji 2" onClick={() => handleEmojiClick('🦐')}>🦐</span>
+                        <span role="img" aria-label="Emoji 3" onClick={() => handleEmojiClick('🦑')}>🦑</span>
+                        <span role="img" aria-label="Emoji 4" onClick={() => handleEmojiClick('🦪')}>🦪</span>
+                        
 
-    <span role="img" aria-label="Emoji 1" onClick={() => handleEmojiClick('🐦')}>🐦</span>
-    <span role="img" aria-label="Emoji 2" onClick={() => handleEmojiClick('🐸')}>🐸</span>
-    <span role="img" aria-label="Emoji 3" onClick={() => handleEmojiClick('🐽')}>🐽</span>
-    <span role="img" aria-label="Emoji 4" onClick={() => handleEmojiClick('🐷')}>🐷</span>
-    <span role="img" aria-label="Emoji 5" onClick={() => handleEmojiClick('🐮')}>🐮</span>
-    <span role="img" aria-label="Emoji 6" onClick={() => handleEmojiClick('🦁')}>🦁</span>
-    <span role="img" aria-label="Emoji 7" onClick={() => handleEmojiClick('🐯')}>🐯</span>
-    <span role="img" aria-label="Emoji 8" onClick={() => handleEmojiClick('🐨')}>🐨</span>
-    <span role="img" aria-label="Emoji 9" onClick={() => handleEmojiClick('🐻‍❄️')}>🐻‍❄️</span>
-    <span role="img" aria-label="Emoji 10" onClick={() => handleEmojiClick('🐼')}>🐼</span>
-    <span role="img" aria-label="Emoji 11" onClick={() => handleEmojiClick('🐻')}>🐻</span>
-    <span role="img" aria-label="Emoji 12" onClick={() => handleEmojiClick('🦊')}>🦊</span>
-    <span role="img" aria-label="Emoji 13" onClick={() => handleEmojiClick('🐰')}>🐰</span>
-    <span role="img" aria-label="Emoji 14" onClick={() => handleEmojiClick('🐹')}>🐹</span>
-    <span role="img" aria-label="Emoji 15"onClick={() => handleEmojiClick('🐭')}>🐭</span>
-    <span role="img" aria-label="Emoji 16"onClick={() => handleEmojiClick('🐱')}>🐱</span>
-    <span role="img" aria-label="Emoji 17" onClick={() => handleEmojiClick('🐶')}>🐶</span>
-    <span role="img" aria-label="Emoji 17" onClick={() => handleEmojiClick('🐺')}>🐺</span>
-    <span role="img" aria-label="Emoji 1" onClick={() => handleEmojiClick('🐗')}>🐗</span>
-    <span role="img" aria-label="Emoji 2" onClick={() => handleEmojiClick('🐴')}>🐴</span>
-    <span role="img" aria-label="Emoji 3" onClick={() => handleEmojiClick('🦄')}>🦄</span>
-    <span role="img" aria-label="Emoji 4" onClick={() => handleEmojiClick('🐝')}>🐝</span>
-    <span role="img" aria-label="Emoji 5" onClick={() => handleEmojiClick('🐛')}>🐛</span>
-    <span role="img" aria-label="Emoji 6" onClick={() => handleEmojiClick('🦋')}>🦋</span>
-    <span role="img" aria-label="Emoji 7" onClick={() => handleEmojiClick('🐌')}>🐌</span>
-    <span role="img" aria-label="Emoji 8" onClick={() => handleEmojiClick('🐞')}>🐞</span>
-    <span role="img" aria-label="Emoji 9" onClick={() => handleEmojiClick('🐜')}>🐜</span>
-    <span role="img" aria-label="Emoji 10" onClick={() => handleEmojiClick('🦗')}>🦗</span>
-    <span role="img" aria-label="Emoji 11" onClick={() => handleEmojiClick('🕷️')}>🕷️</span>
-    <span role="img" aria-label="Emoji 12" onClick={() => handleEmojiClick('🦂')}>🦂</span>
-    <span role="img" aria-label="Emoji 13" onClick={() => handleEmojiClick('🦟')}>🦟</span>
-    <span role="img" aria-label="Emoji 14" onClick={() => handleEmojiClick('🦠')}>🦠</span>
-    <span role="img" aria-label="Emoji 15"onClick={() => handleEmojiClick('🌸')}>🌸</span>
-    <span role="img" aria-label="Emoji 16"onClick={() => handleEmojiClick('💐')}>💐</span>
-    <span role="img" aria-label="Emoji 17" onClick={() => handleEmojiClick('🌹')}>🌹</span>
-    <span role="img" aria-label="Emoji 17" onClick={() => handleEmojiClick('🌺')}>🌺</span>
-    <span role="img" aria-label="Emoji 1" onClick={() => handleEmojiClick('🌻')}>🌻</span>
-    <span role="img" aria-label="Emoji 2" onClick={() => handleEmojiClick('🌼')}>🌼</span>
-    <span role="img" aria-label="Emoji 3" onClick={() => handleEmojiClick('🌷')}>🌷</span>
-    <span role="img" aria-label="Emoji 4" onClick={() => handleEmojiClick('🌱')}>🌱</span>
-    <span role="img" aria-label="Emoji 5" onClick={() => handleEmojiClick('🌲')}>🌲</span>
-    <span role="img" aria-label="Emoji 6" onClick={() => handleEmojiClick('🌳')}>🌳</span>
-    <span role="img" aria-label="Emoji 7" onClick={() => handleEmojiClick('🌴')}>🌴</span>
-    <span role="img" aria-label="Emoji 8" onClick={() => handleEmojiClick('🌵')}>🌵</span>
-    <span role="img" aria-label="Emoji 9" onClick={() => handleEmojiClick('🌾')}>🌾</span>
-    <span role="img" aria-label="Emoji 10" onClick={() => handleEmojiClick('🌿')}>🌿</span>
-    <span role="img" aria-label="Emoji 11" onClick={() => handleEmojiClick('☘️')}>☘️</span>
-    <span role="img" aria-label="Emoji 12" onClick={() => handleEmojiClick('🍀')}>🍀</span>
-    <span role="img" aria-label="Emoji 13" onClick={() => handleEmojiClick('🍁')}>🍁</span>
-    <span role="img" aria-label="Emoji 14" onClick={() => handleEmojiClick('🍂')}>🍂</span>
-    <span role="img" aria-label="Emoji 15"onClick={() => handleEmojiClick('🍃')}>🍃</span>
-    <span role="img" aria-label="Emoji 16"onClick={() => handleEmojiClick('🍄')}>🍄</span>
-    <span role="img" aria-label="Emoji 17" onClick={() => handleEmojiClick('🌰')}>🌰</span>
-    <span role="img" aria-label="Emoji 17" onClick={() => handleEmojiClick('🦀')}>🦀</span>
-    <span role="img" aria-label="Emoji 1" onClick={() => handleEmojiClick('🦞')}>🦞</span>
-    <span role="img" aria-label="Emoji 2" onClick={() => handleEmojiClick('🦐')}>🦐</span>
-    <span role="img" aria-label="Emoji 3" onClick={() => handleEmojiClick('🦑')}>🦑</span>
-    <span role="img" aria-label="Emoji 4" onClick={() => handleEmojiClick('🦪')}>🦪</span>
-     
-
-  </div>
+                  </div>
  
                 )}
                  </div>
   </div>
-                      {/* </div>
-                    </div> */}
-                  {/* </div> */}
+                   
             
           </form>
-        {/* </div> */}
+     
         <h1 className="posts-title">
         <span>Posts</span>
         <span className="underline">____________</span>
@@ -521,10 +486,10 @@ const handleDislike = async (postId) => {
         </div>
             <div className='like-dislike'>
                   <button className='lik' onClick={() => handleLike(Post.id)}>
-                  <span role='img' aria-label='Like'>👍</span>  Like ({Post.likesCount})
+                  <span role='img' aria-label='Like'>👍</span>{Post.likesCount}
                   </button>
                   <button className='dis' onClick={() => handleDislike(Post.id)}>
-                  <span role='img' aria-label='Dislike' >👎</span> Dislike ({Post.dislikesCount})
+                  <span role='img' aria-label='Dislike' >👎</span> {Post.dislikesCount}
                   </button>
             </div>
         {Post.img && <img src={Post.img} alt='Posted' className='posted-image' />}
