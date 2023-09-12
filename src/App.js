@@ -12,7 +12,6 @@ import Posts from './pages/Posts';
 import Profil from './pages/profil';
 import './App.css';
 
-
 function App() {
   const currentUser = useContext(AuthContext);
 
@@ -20,16 +19,17 @@ function App() {
     <div className="App">
       <Router>
         <nav className='navigation'>
-          <ul className='ul'>
+          <ul className='ul nav-links'>
             {auth.currentUser ? (    
-              <> <li className='li'><Link to='/home'>Home</Link></li>
-                <li className='li'><Link onClick={() => signOut(auth)} to='logout'>Logout</Link></li>
+              <>
+                <li className='li'><Link to='/home'>Home</Link></li>
                 <li className='li'><Link to='/Post'>Posts</Link></li>
-                <li className='li'><Link to='/Profil'>Profile</Link></li></>
-                 ) : (<li className='li'><Link to="/login">Login</Link></li>)}
-            
-                
-            
+                <li className='li'><Link to='/Profil'>Profile</Link></li>
+                <li className='li'><Link onClick={() => signOut(auth)} to='logout'>Logout</Link></li>
+              </>
+            ) : (
+              <li className='li'><Link to="/login">Login</Link></li>
+            )}
           </ul>
         </nav>
 

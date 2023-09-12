@@ -260,10 +260,8 @@ const handleDislike = async (postId) => {
 
     return (
       <div className='Container'>
-        {/* <div className='AjouterPost'> */}
           <form className='Form-Container' type='submit'>
-          {/* <div aria-label="Créer une publication" className='pub'  role="region"> */}
-            {/* <div className="x1cy8zhl x78zum5 x1iyjqo2 xs83m0k xh8yej3"> */}
+          
             <div className="users_image">
                     <a href="#"  onClick={handleTitleClick}>
                               <img

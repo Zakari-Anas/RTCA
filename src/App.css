@@ -1,29 +1,54 @@
-.navigation{
+/* Navigation Menu */
+.navigation {
   display: flex;
   flex-direction: column;
-  outline: none;
-  /* border-bottom: 1px solid purple; */
   background-color: midnightblue;
-  
-}.ul{
+  padding: 20px; /* Add padding for better spacing */
+}
+
+/* Unordered List */
+.ul {
   display: flex;
   flex-direction: row;
   gap: 20px;
-  justify-content: left;
- 
-}.li{
-  list-style: none;
+  justify-content: center; /* Center align the list items horizontally */
+  list-style: none; /* Remove default list styles */
+  padding: 0; /* Remove default padding */
+  margin: 0; /* Remove default margin */
+}
+
+/* List Items */
+.li {
   font-size: 20px;
   font-weight: bold;
   color: #61dafb;
-  text-decoration: none;
   cursor: pointer;
   padding: 10px;
-  border: solid;
   border-radius: 10px;
-  background-color: #61dafb;
-  /* transition: 0.4s; */
-}a{
+  background-color: transparent; /* Transparent background */
+  transition: background-color 0.4s ease; /* Smooth background color transition */
+}
+
+/* List Item Links */
+a {
   text-decoration: none;
   color: white;
+}
+
+/* Hover Styles */
+.li:hover {
+  background-color: #61dafb; /* Change background color on hover */
+  transition: background-color 0.4s ease; /* Smooth background color transition on hover */
+}
+.nav-links {
+  display: flex;
+  justify-content: flex-start; /* Align links to the left */
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+/* Align the "Logout" link to the right */
+.nav-links .li:last-child {
+  margin-left: auto;
 }

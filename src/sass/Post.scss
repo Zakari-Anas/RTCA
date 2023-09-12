@@ -1,5 +1,4 @@
 /* Post.scss */
-
 .Container {
   display: flex;
   flex-direction: column;
@@ -8,12 +7,13 @@
   max-width: 600px;
   margin: 0 auto;
   padding: 20px;
-  background-color: #87a0c2;
+   background-image: linear-gradient(180deg, hwb(0 0% 100%) 0%, #8f94fb 100%);
+   outline: none;
 }
-body{
-  background-color: #87a0c2;
-  overflow-x: hidden;
-}
+// body{
+//   background-color: #87a0c2;
+//   overflow-x: hidden;
+// }
 // .AjouterPost {
 //   width: 80%;
 //   border-radius: 8px;
@@ -42,17 +42,13 @@ body{
 }
 
 .inp {
-  // flex: 3;
-  // border: none;
-  // outline: none;
+ 
   font-size: 16px;
   padding: 10px 50px 10px 50px;
   position: relative;
   left: 20%;
   outline: none;
   border-radius: 20px;
-  
-  // width: 300px;
 }
 
 .vid{
@@ -133,9 +129,9 @@ body{
   margin-top: -40px;
  
 }
-.post{
-  width: 580px;
-}
+// .post{
+//   width: 580px;
+// }
 .post-text{
   position: relative;
   left: 90px;
@@ -171,7 +167,7 @@ body{
   top: -40px;
 }
 .post {
-  background-color: rgb(203, 218, 229);
+  background-image: linear-gradient(180deg, hwb(0 97% 3%) 0%, #393939 100%);
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
   padding: 20px;
   margin-bottom: 20px;
@@ -311,6 +307,7 @@ button:hover {
 .comments {
   border-top: 1px solid #ccc;
   padding-top: 10px;
+  color: white;
 }
 .comment {
   margin-top: 10px;
@@ -322,7 +319,7 @@ button:hover {
   font-weight: bold;
   margin-right: 10px;
   font-size: 14px;
-  color: #555;
+  color: #000000;
   margin: 0;
 }
 
