@@ -20,16 +20,14 @@ function App() {
       <Router>
         <nav className='navigation'>
           <ul className='ul nav-links'>
-            {auth.currentUser ? (    
+            {auth.currentUser && (    
               <>
                 <li className='li'><Link to='/home'>Home</Link></li>
                 <li className='li'><Link to='/Post'>Posts</Link></li>
                 <li className='li'><Link to='/Profil'>Profile</Link></li>
                 <li className='li'><Link onClick={() => signOut(auth)} to='logout'>Logout</Link></li>
               </>
-            ) : (
-              <li className='li'><Link to="/login">Login</Link></li>
-            )}
+            ) }
           </ul>
         </nav>
 
