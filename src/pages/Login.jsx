@@ -4,35 +4,36 @@ import '../sass/SignUp&SignIn.scss'
 import user from '../images/img.png'
 import { Link } from 'react-router-dom'
 import { useNavigate } from 'react-router-dom'
-import { auth } from '../Firebase'
+import { auth, db } from '../Firebase'
 import { signInWithEmailAndPassword } from 'firebase/auth' 
 import { AuthContext } from '../context/authContext'
 import { useContext } from 'react'
+import { doc, updateDoc } from 'firebase/firestore'
 const Login = () => {
         const navigate = useNavigate();
         const [email, setEmail] = useState()
         const [password, setPassword] = useState()
-        const {currentUser} = useContext(AuthContext);
        
         
 const handleSubmit = async (e) => {
-
-      signInWithEmailAndPassword(auth, email, password);
-    // if (auth.currentUser) {
-      navigate('/posts');
-    // } else {
-    //   alert('Something went wrong');
-    // }
-            
-    
-
-}
+  try {
+    e.preventDefault();
+    const userCredential = await signInWithEmailAndPassword(auth, email, password);
+      navigate('/home');
+      updateDoc(doc(db, 'USERS', auth.currentUser.uid), {
+        online: true,
+      });
+  } catch (error) {
+    console.error('Error during sign-in:', error);
+    // console.log(error.message);
+  }
+};
   return (
     <div>
         <div className='formContainer'>
             <div className='formWrapper'>
                 <h1 className='logo'>Just Chatting</h1>
-                    <form  onSubmit={handleSubmit}className='SignUpF' >
+                    <form  onSubmit={handleSubmit} className='SignUpF' >
                      
                         <input onChange={(e) => setEmail(e.target.value)}
                             type='email '

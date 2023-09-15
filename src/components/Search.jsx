@@ -18,8 +18,8 @@ function Search() {
     try {
       const q = query(
         collection(db, 'USERS'),
-        where('displayName', '>=', username.toLowerCase()),
-        where('displayName', '<=', username.toLowerCase() + '\uf8ff')
+        where('FirstName', '>=', username.toLowerCase() || 'LastName', '>=', username.toLowerCase()),
+
       );
       const querySnapshot = await getDocs(q);
 
@@ -92,7 +92,7 @@ function Search() {
   return (
     <div className='search'>
       <div className='Searchform'>
-        <input type='text' placeholder='Find user' value={username} onKeyDown={handleClick} onChange={(e) => setUsername(e.target.value)} />
+        <input type='text' placeholder='Find user' value={username} onKeyDown={handleClick} onChange={(e) => setUsername(e.target.value.toLowerCase())} />
       </div>
       {users.length > 0 && (
         <>

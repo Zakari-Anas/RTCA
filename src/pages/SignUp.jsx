@@ -16,6 +16,7 @@ import { useNavigate } from 'react-router-dom';
 const SignUp = () => {
 
     const navigate = useNavigate();
+    const [status, SetStatus] = useState(false)
         const [phone, setPhone] = useState([])
         const [firstname, setFirstName] = useState()
         const [lastname, setLastName] = useState()
@@ -24,11 +25,14 @@ const SignUp = () => {
         const [confirmPassword, setConfirmPassword] = useState() 
         const [file, setFile] = useState()
         const [error, setError] = useState(false)
+      
 const handleSubmit = async (e) => {   
     e.preventDefault();
     try {
         const res = await createUserWithEmailAndPassword(auth, email, password);
         if (res) {
+            // Set the user's online status to true upon successful sign-up
+          
             const storageRef = ref(storage, `users/${lastname}/${res.user.uid}/profile.jpg`);
             const uploadTask = uploadBytesResumable(storageRef, file);
 
@@ -44,6 +48,7 @@ const handleSubmit = async (e) => {
                 },
                 async () => {
                     try {
+                          SetStatus(true)
                         const downloadURL = await getDownloadURL(uploadTask.snapshot.ref);
                         await updateProfile(res.user, {
                             displayName: firstname + " " + lastname,
@@ -57,11 +62,12 @@ const handleSubmit = async (e) => {
                             Email: email,
                             PhoneNumber: phone.map((e)=>(e.fullNumber)),
                             PhotoURL: downloadURL,
-                            displayName:res.user.displayName
+                            displayName:res.user.displayName,
+                            // online:status,
                         });
 
                         await setDoc(doc(db,"usersChat",res.user.uid),{
-                            
+                              
                         })
                     } catch (err) {
                         setError(true);

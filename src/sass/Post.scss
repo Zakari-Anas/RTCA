@@ -127,6 +127,7 @@
 
 .Posts {
   margin-top: -40px;
+  width: 100%;
  
 }
 // .post{
@@ -192,7 +193,7 @@
 }
 .lik{
   position: relative;
-  left: 60px;
+  left: 150px;
 }
 .dis{
   position: relative;
@@ -273,20 +274,20 @@
 }
 
 button {
-  // background-color: transparent;
+
   border: none;
   cursor: pointer;
   margin-right: 20px;
   background-color: #3498db;
   color: #fff;
   border: none;
-  padding: 5px 10px;
+  padding: 5px 5px;
   border-radius: 5px;
   cursor: pointer;
-  transition: background-color 0.3s;
+  transition: background-color 1s;
 }
 button:hover {
-  background-color: #2980b9;
+  background-color: #045387;
 }
 .posted-image {
   max-width: 100%;
@@ -301,9 +302,7 @@ button:hover {
   margin-bottom: 10px;
   font-size: 16px;
 }
-// .comments {
-//   margin-top: 20px;
-// }
+
 .comments {
   border-top: 1px solid #ccc;
   padding-top: 10px;

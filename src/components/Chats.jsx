@@ -1,7 +1,7 @@
 import React, { useContext, useEffect } from 'react';
 import chat from '../images/cam.png';
 import { useState } from 'react';
-import { doc, onSnapshot } from 'firebase/firestore';
+import { collection, doc, getDocs, onSnapshot } from 'firebase/firestore';
 import { db } from '../Firebase';
 import { AuthContext } from '../context/authContext';
 import { auth } from '../Firebase';
@@ -10,7 +10,7 @@ import { ChatContext } from '../context/ChatContext';
 function Chats() {
   const [chats, setChats] = useState([]);
   const { dispatch } = useContext(ChatContext);
-  
+  const [userOnline,setuserOnline]=useState([]);
   useEffect(() => {
 
     const getChats = () => {
@@ -19,22 +19,36 @@ function Chats() {
           setChats(doc.data());
           // console.log(doc.data());
         });
-
         return () => {
           unsub();
         };
-      }
-      
+      }   
     };
 
-    getChats();
+  const unsubscribe = ()=>{
+    onSnapshot(collection(db, 'USERS'), (snapshot) => {
+      const updatedUserOnline = [];
+      snapshot.forEach((doc) => {
+        const userData = doc.data();
+        updatedUserOnline.push({ id: doc.id, ...userData });
+      });
+      setuserOnline(updatedUserOnline);
+    });
+  }
+
+    // Cleanup the listener when the component unmounts
+
+      getChats();
+      unsubscribe();
+    
+
   }, [auth.currentUser]);
 
 
     
 
   
- const handleSelect = (u) => {
+  const handleSelect = (u) => {
     dispatch({ type: "CHANGE_USER", payload: u });
   };
 
@@ -54,7 +68,17 @@ return (
           )}
           <div className='userChatInfo'>
             <span>{chatData.UserInfo && chatData.UserInfo.displayName}</span>
-            {/* <p>{chatData.lastMessage?.text}</p> */}
+            <p>{chatData.lastMessage?.text}</p>
+            {chatData.UserInfo && userOnline.map((user,index) => {
+              if (user.Id === chatData.UserInfo.uid && user.online === true) {
+                return <p key={index}>Connected</p>;
+              }
+              if (user.Id === chatData.UserInfo.uid && user.online === false) {
+                return <p key={index}>Not Connected</p>;
+              }
+              return null;
+            })}
+            
           </div>
         </div>
       ))}
