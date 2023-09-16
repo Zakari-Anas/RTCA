@@ -28,6 +28,8 @@ const SignUp = () => {
       
 const handleSubmit = async (e) => {   
     e.preventDefault();
+        const capitalizedFirstName = firstname.charAt(0).toUpperCase() + firstname.slice(1).toLowerCase();
+        const capitalizedLastName = lastname.charAt(0).toUpperCase() + lastname.slice(1).toLowerCase();
     try {
         const res = await createUserWithEmailAndPassword(auth, email, password);
         if (res) {
@@ -51,19 +53,19 @@ const handleSubmit = async (e) => {
                           SetStatus(true)
                         const downloadURL = await getDownloadURL(uploadTask.snapshot.ref);
                         await updateProfile(res.user, {
-                            displayName: firstname + " " + lastname,
+                            displayName: capitalizedFirstName + " " + capitalizedLastName,
                             photoURL: downloadURL
                         });
 
                         await setDoc(doc(db, "USERS", res.user.uid), {
                             Id: res.user.uid,
-                            FirstName: firstname,
-                            LastName: lastname,
+                            FirstName: capitalizedFirstName,
+                            LastName: capitalizedLastName,
                             Email: email,
                             PhoneNumber: phone.map((e)=>(e.fullNumber)),
                             PhotoURL: downloadURL,
                             displayName:res.user.displayName,
-                            // online:status,
+                            online:status,
                         });
 
                         await setDoc(doc(db,"usersChat",res.user.uid),{

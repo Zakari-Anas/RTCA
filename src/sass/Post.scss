@@ -10,17 +10,6 @@
    background-image: linear-gradient(180deg, hwb(0 0% 100%) 0%, #8f94fb 100%);
    outline: none;
 }
-// body{
-//   background-color: #87a0c2;
-//   overflow-x: hidden;
-// }
-// .AjouterPost {
-//   width: 80%;
-//   border-radius: 8px;
-//   background-color: rgb(57, 53, 53);
-//   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-//   margin-bottom: 20px;
-// }
 
 .Form-Container {
   display: flex;
@@ -138,32 +127,26 @@
   left: 90px;
 }
 
-// .posts-title {
-//   font-size: 32px; /* Taille de la police */
-//   color: #333; /* Couleur du texte */
-//   margin-top: 20px; /* Marge supérieure */
-//   text-decoration: underline;
-// }
 .posts-title {
-  font-size: 32px; /* Taille de la police */
-  color: #020202; /* Couleur du texte */
-  margin-top: 20px; /* Marge supérieure */
-  text-align: center; /* Centrer le texte */
+  font-size: 32px; 
+  color: #020202; 
+  margin-top: 20px; 
+  text-align: center; 
 }
 
 .underline {
   display: block;
   text-align: center;
-  font-size: 16px; /* Taille de la police des lignes */
-  color: #050404; /* Couleur des lignes */
+  font-size: 16px; 
+  color: #050404; 
   position: relative;
   top: -20px;
 }
 .underline2 {
   display: block;
   text-align: center;
-  font-size: 16px; /* Taille de la police des lignes */
-  color: #050505; /* Couleur des lignes */
+  font-size: 16px; 
+  color: #050505; 
   position: relative;
   top: -40px;
 }

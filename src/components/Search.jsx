@@ -1,7 +1,7 @@
 import React from 'react';
 import '../sass/Home.scss';
 import { useState } from 'react';
-import { collection, query, where, getDocs, getDoc, updateDoc, serverTimestamp } from 'firebase/firestore';
+import { collection, query, where, getDocs, getDoc, updateDoc, serverTimestamp, orderBy, startAt, endAt } from 'firebase/firestore';
 import { db } from '../Firebase';
 import { useContext } from 'react';
 import { AuthContext } from '../context/authContext';
@@ -14,31 +14,61 @@ function Search() {
   const [err, setErr] = useState(false);
   // const currentUser = useContext(AuthContext);
 
-  const handleSearch = async () => {
-    try {
-      const q = query(
-        collection(db, 'USERS'),
-        where('FirstName', '>=', username.toLowerCase() || 'LastName', '>=', username.toLowerCase()),
+ const handleSearch = async () => {
+  try {
+    // Search by last name
+    const lastNameQuery = query(
+      collection(db, 'USERS'),
+      orderBy('LastName'),
+      startAt(username.charAt(0).toUpperCase() + username.slice(1).toLowerCase()),
+      endAt(username.charAt(0).toUpperCase() + username.slice(1).toLowerCase() + '\uf8ff')
+    );
 
-      );
-      const querySnapshot = await getDocs(q);
+    const lastNameQuerySnapshot = await getDocs(lastNameQuery);
 
-      const matchingUsers = [];
-      querySnapshot.forEach((doc) => {
-        matchingUsers.push(doc.data());
-      });
+    // Search by first name
+    const firstNameQuery = query(
+      collection(db, 'USERS'),
+      orderBy('FirstName'),
+      startAt(username.charAt(0).toUpperCase() + username.slice(1).toLowerCase()),
+      endAt(username.charAt(0).toUpperCase() + username.slice(1).toLowerCase() + '\uf8ff')
+    );
 
-      setUsers(matchingUsers);
-      console.log(users);
-      setErr(false); // Reset the error state if the search is successful
-    } catch (e) {
-      setErr(true);
-      
-    }
-  };
+    const firstNameQuerySnapshot = await getDocs(firstNameQuery);
+
+    const displayName = query(
+      collection(db, 'USERS'),
+      orderBy('displayName'),
+      startAt(username),
+      endAt(username + '\uf8ff')
+    );
+
+    const displayNameQuerySnapshot = await getDocs(displayName);
+    // Combine the results
+    const matchingUsers = [];
+
+    lastNameQuerySnapshot.forEach((doc) => {
+      matchingUsers.push(doc.data());
+    });
+
+    firstNameQuerySnapshot.forEach((doc) => {
+      matchingUsers.push(doc.data());
+    });
+
+    displayNameQuerySnapshot.forEach((doc) => {
+      matchingUsers.push(doc.data());
+    });
+
+    setUsers(matchingUsers);
+    console.log(users);
+    setErr(false); // Reset the error state if the search is successful
+  } catch (e) {
+    setErr(true);
+  }
+};
 
   const handleClick = (e) => {
-    if (e.target.value!=='' && e.code === 'Enter') {
+    if (e.target.value !== '' && e.code === 'Enter') {
       handleSearch();
     }
   };
@@ -65,7 +95,7 @@ function Search() {
             photoURL:user.PhotoURL  
           },
           [combineId+".Date"]:serverTimestamp()
-
+          
         })
 
            await updateDoc(doc(db,"usersChat",user.Id),{
@@ -92,7 +122,7 @@ function Search() {
   return (
     <div className='search'>
       <div className='Searchform'>
-        <input type='text' placeholder='Find user' value={username} onKeyDown={handleClick} onChange={(e) => setUsername(e.target.value.toLowerCase())} />
+        <input type='text' placeholder='Find user' value={username} onKeyDown={handleClick} onChange={(e) => setUsername(e.target.value)} />
       </div>
       {users.length > 0 && (
         <>
