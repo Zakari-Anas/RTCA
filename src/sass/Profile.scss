@@ -4,11 +4,13 @@
     max-width: 800px;
     margin: 0 auto;
     padding: 20px;
+    background-image: linear-gradient(180deg, hwb(0 0% 100%) 0%, #8f94fb 100%);
   }
   
   .profile-header {
     text-align: center;
     padding: 20px 0;
+
   }
   
   .profile-cover {
@@ -27,6 +29,7 @@
   .profile-info h1 {
     font-size: 24px;
     margin: 10px 0;
+    color: whitesmoke;
   }
   
   .profile-info p {
@@ -35,7 +38,7 @@
   }
   
   .profile-content {
-    background-color: #f5f5f5;
+    // background-image: linear-gradient(180deg, hwb(0 0% 100%) 0%, #8f94fb 100%);
     border-radius: 8px;
     padding: 20px;
     margin-top: 20px;
@@ -47,6 +50,7 @@
     border: 1px solid #ccc;
     border-radius: 4px;
     resize: vertical;
+    // font-weight: bold;
   }
   
   .post-form button {
@@ -76,6 +80,12 @@
     line-height: 1.5;
     color: #333;
   }
+    .posts .post .commentss {
+    font-size: 16px;
+    line-height: 1.5;
+    color: whitesmoke;
+    margin-left: 20px;
+  }
 
 .post-actions {
     display: flex;
@@ -99,3 +109,69 @@
   .post-actions button:hover {
     color: #007bff;
   }
+  
+.comment-text {
+  margin-top: 5px;
+  font-size: 14px;
+  margin: 5px 0;
+}
+.Post-text {
+  font-size: 15px;
+  margin-top: 30px;
+  line-height: 1.4;
+  color: #333333;
+  left: 0px;
+  max-width: 100%;
+  overflow: hidden;
+  word-wrap: break-word;
+
+}
+
+.post-text:before {
+  // content: open-quote;
+  font-size: 24px;
+  margin-right: 5px;
+  vertical-align: middle;
+}
+
+.post-text:after {
+  // content: close-quote;
+  font-size: 24px;
+  margin-left: 5px;
+  vertical-align: middle;
+}
+
+.post-text em {
+  font-style: italic;
+  color: #e74c3c;
+}
+
+.post-text strong {
+  font-weight: bold;
+}
+
+.post-text a {
+  color: #3498db;
+   text-decoration: underline;
+}
+
+.post-text a:hover {
+  color: #2980b9;
+  text-decoration: none;
+  
+}
+
+.post-text ul,
+.post-text ol {
+  padding-left: 20px;
+}
+
+.post-text li {
+  margin-bottom: 5px;
+}
+
+.post-text img {
+  max-width: 100%;
+  border-radius: 5px;
+  margin-top: 10px;
+}

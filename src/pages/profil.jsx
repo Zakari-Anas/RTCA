@@ -3,7 +3,6 @@ import '../sass/Profile.scss';
 import { auth, db } from '../Firebase';
 import { useEffect } from 'react';
 import { collection, deleteDoc, doc, getDoc, getDocs, query, setDoc, where } from 'firebase/firestore';
-import Posts from './Posts';
 import {v4 as uuid} from 'uuid';
 function Profil() {
   const [posts, setPosts] = useState([]);
@@ -48,13 +47,17 @@ function Profil() {
 
 
 
-  const handleLike = async (postId) => {
+const handleLike = async (postId) => {
   const userId = auth.currentUser.uid;
   const postRef = doc(db, 'Posts', postId);
   const likesRef = collection(postRef, 'likes');
+  const dislikesRef = collection(postRef, 'dislikes');
 
   const likeDoc = doc(likesRef, userId);
+  const dislikeDoc = doc(dislikesRef, userId);
+
   const likeDocSnap = await getDoc(likeDoc);
+  const dislikeDocSnap = await getDoc(dislikeDoc);
 
   if (!likeDocSnap.exists()) {
     await setDoc(likeDoc, { liked: true });
@@ -64,7 +67,19 @@ function Profil() {
     if (postIndex !== -1) {
       const newData = [...posts];
       newData[postIndex].likesCount++;
-     setPosts(newData);
+      setPosts(newData);
+    }
+
+    // If the user has previously disliked the post, remove the dislike
+    if (dislikeDocSnap.exists()) {
+      await deleteDoc(dislikeDoc);
+
+      // Update dislikes count
+      if (postIndex !== -1) {
+        const newData = [...posts];
+        newData[postIndex].dislikesCount--;
+        setPosts(newData);
+      }
     }
   } else {
     await deleteDoc(likeDoc);
@@ -79,16 +94,21 @@ function Profil() {
   }
 };
 
+
 const handleDislike = async (postId) => {
   const userId = auth.currentUser.uid;
   const postRef = doc(db, 'Posts', postId);
+  const likesRef = collection(postRef, 'likes');
   const dislikesRef = collection(postRef, 'dislikes');
 
+  const likeDoc = doc(likesRef, userId);
   const dislikeDoc = doc(dislikesRef, userId);
+
+  const likeDocSnap = await getDoc(likeDoc);
   const dislikeDocSnap = await getDoc(dislikeDoc);
 
   if (!dislikeDocSnap.exists()) {
-    await setDoc(dislikeDoc, { disliked: true, userId });
+    await setDoc(dislikeDoc, { disliked: true });
 
     // Update dislikes count
     const postIndex = posts.findIndex((post) => post.id === postId);
@@ -96,6 +116,18 @@ const handleDislike = async (postId) => {
       const newData = [...posts];
       newData[postIndex].dislikesCount++;
       setPosts(newData);
+    }
+
+    // If the user has previously liked the post, remove the like
+    if (likeDocSnap.exists()) {
+      await deleteDoc(likeDoc);
+
+      // Update likes count
+      if (postIndex !== -1) {
+        const newData = [...posts];
+        newData[postIndex].likesCount--;
+        setPosts(newData);
+      }
     }
   } else {
     await deleteDoc(dislikeDoc);
@@ -143,45 +175,52 @@ const handleDislike = async (postId) => {
         </div>
       </div>
       <div className='profile-content'>
-        {/* <div className='post-form'>
-          <textarea
-            placeholder="What's on your mind?"
-            value={newPost}
-            onChange={(e) => setNewPost(e.target.value)}
-          />
-          <button onClick={handlePostSubmit}>Post</button>
-        </div> */}
+
         <div className='posts'>
-         {posts.map((Post) => (
-              <div key={Post.id} className='post'>
-                <div className='post-details'>
-                  <p className='posted-by'>{Post.PostedBy}</p>
-                  <p className='post-text'>{Post.text}</p>
+        {posts.length > 0 ? (posts.map((Post) => (
+      <div key={Post.id} className='post'>
+        <div className='post-details'>
+          <div className='groupImagePostBy'>
+            <img className='post-image' src={Post.userImage} alt='Posted' />
+                            
+              <p className='posted-by'>{Post.PostedBy}</p>
+          </div>
+          <p className='Post-text'>{Post.text}</p>
+          {Post.img && <img src={Post.img} alt='Posted' className='posted-image' />}
+        </div>
+            <div className='like-dislike'>
+                  <button className='lik' onClick={() => handleLike(Post.id)}>
+                  <span role='img' aria-label='Like'>👍</span>{Post.likesCount}
+                  </button>
+                  <button className='dis' onClick={() => handleDislike(Post.id)}>
+                  <span role='img' aria-label='Dislike' >👎</span> {Post.dislikesCount}
+                  </button>
+            </div>
+        
+        <input onKeyDown={(e) => add2(e, Post)} placeholder='Comment' className='input1' />
+        
+        {Post.comments && (
+          <div className='comments'>
+            {Post.comments.map((comment,id) => (
+              <div key={id} className='comment'>
+                <div className='commentImmage'>    
+                  <img src={comment.userImage} alt='Commenter' className='comment-image' /> 
+                  <p className='commented-by'>{comment.PostedBy}</p>
                 </div>
-                    <div className='like-dislike'>
-                          <button className='lik' onClick={() => handleLike(Post.id)}>
-                          <span role='img' aria-label='Like'>👍</span>{Post.likesCount}
-                          </button>
-                          <button className='dis' onClick={() => handleDislike(Post.id)}>
-                          <span role='img' aria-label='Dislike' >👎</span> {Post.dislikesCount}
-                          </button>
-                    </div>
-                {Post.img && <img src={Post.img} alt='Posted' className='posted-image' />}
-                <input onKeyDown={(e) => add2(e, Post)} placeholder='Comment' className='input1' />
+            
                 
-                {Post.comments && (
-                  <div className='comments'>
-                    {Post.comments.map((comment,id) => (
-                      <div key={id} className='comment'>
-                        <p className='commented-by'>{comment.PostedBy}</p>
-                        <p className='comment-text'>{comment.text}</p>
-                      </div>
-                    ))}
-                  </div>
-                )}
+                <p className='commentss'>{comment.text}</p>
               </div>
+            ))}
+          </div>
+        )}
+      </div>
       
-          ))}
+    )) ) : (
+              <div>
+                  <p>you have no Posts</p>
+              </div>   
+    )}
         </div>
       </div>
     </div>

@@ -1,33 +1,48 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useState } from 'react'
 import '../sass/SignUp&SignIn.scss'
 import user from '../images/img.png'
 import { Link } from 'react-router-dom'
 import { useNavigate } from 'react-router-dom'
 import { auth, db } from '../Firebase'
-import { signInWithEmailAndPassword } from 'firebase/auth' 
+import { signInWithEmailAndPassword, signOut } from 'firebase/auth' 
 import { AuthContext } from '../context/authContext'
 import { useContext } from 'react'
 import { doc, updateDoc } from 'firebase/firestore'
+import { set } from 'mongoose'
+
+
+
+
+
+
 const Login = () => {
         const navigate = useNavigate();
         const [email, setEmail] = useState()
         const [password, setPassword] = useState()
-       
-        
-const handleSubmit = async (e) => {
-  try {
-    e.preventDefault();
-    const userCredential = await signInWithEmailAndPassword(auth, email, password);
-      navigate('/home');
+ 
+
+
+
+
+  const handleSubmit = async (e) => {
+    try {
+     
+      e.preventDefault(); 
+      const userCredential = await signInWithEmailAndPassword(auth, email, password);
+      navigate('/Post');
+   
       updateDoc(doc(db, 'USERS', auth.currentUser.uid), {
         online: true,
       });
-  } catch (error) {
-    console.error('Error during sign-in:', error);
-    // console.log(error.message);
-  }
-};
+
+    } catch (error) {
+      console.error('Error during sign-in:', error);
+    }
+  };
+
+
+  
   return (
     <div>
         <div className='formContainer'>
@@ -65,4 +80,4 @@ const handleSubmit = async (e) => {
   )
 }
 
-export default Login
+export { Login };

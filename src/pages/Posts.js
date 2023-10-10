@@ -22,6 +22,7 @@
     useEffect(() => {
        if (auth.currentUser) {
         setuserImage(auth.currentUser.photoURL);
+        
       }
       const getPosts = async () => {
         const docRef = collection(db, 'Posts');
@@ -152,9 +153,7 @@
         });
 
         // Add the user's like to the likes subcollection of the specific post
-        await addDoc(collection(db, `Posts/${postId}/likes`), {
-          
-        });
+     
       }
     );
   } else {
@@ -164,14 +163,11 @@
       id: postId,
       userImage: auth.currentUser.photoURL,
       PostedBy: auth.currentUser.displayName,
-      text: inputValue,
+      text: inputValue, 
       img: "",
     });
 
-    // Add the user's like to the likes subcollection of the specific post
-    await addDoc(collection(db, `Posts/${postId}/likes`), {
-          
-        });
+
   }
 };
 
@@ -200,9 +196,13 @@ const handleLike = async (postId) => {
   const userId = auth.currentUser.uid;
   const postRef = doc(db, 'Posts', postId);
   const likesRef = collection(postRef, 'likes');
+  const dislikesRef = collection(postRef, 'dislikes');
 
   const likeDoc = doc(likesRef, userId);
+  const dislikeDoc = doc(dislikesRef, userId);
+
   const likeDocSnap = await getDoc(likeDoc);
+  const dislikeDocSnap = await getDoc(dislikeDoc);
 
   if (!likeDocSnap.exists()) {
     await setDoc(likeDoc, { liked: true });
@@ -213,6 +213,18 @@ const handleLike = async (postId) => {
       const newData = [...data];
       newData[postIndex].likesCount++;
       setData(newData);
+    }
+
+    // If the user has previously disliked the post, remove the dislike
+    if (dislikeDocSnap.exists()) {
+      await deleteDoc(dislikeDoc);
+
+      // Update dislikes count
+      if (postIndex !== -1) {
+        const newData = [...data];
+        newData[postIndex].dislikesCount--;
+        setData(newData);
+      }
     }
   } else {
     await deleteDoc(likeDoc);
@@ -227,16 +239,21 @@ const handleLike = async (postId) => {
   }
 };
 
+
 const handleDislike = async (postId) => {
   const userId = auth.currentUser.uid;
   const postRef = doc(db, 'Posts', postId);
+  const likesRef = collection(postRef, 'likes');
   const dislikesRef = collection(postRef, 'dislikes');
 
+  const likeDoc = doc(likesRef, userId);
   const dislikeDoc = doc(dislikesRef, userId);
+
+  const likeDocSnap = await getDoc(likeDoc);
   const dislikeDocSnap = await getDoc(dislikeDoc);
 
   if (!dislikeDocSnap.exists()) {
-    await setDoc(dislikeDoc, { disliked: true, userId });
+    await setDoc(dislikeDoc, { disliked: true });
 
     // Update dislikes count
     const postIndex = data.findIndex((post) => post.id === postId);
@@ -244,6 +261,18 @@ const handleDislike = async (postId) => {
       const newData = [...data];
       newData[postIndex].dislikesCount++;
       setData(newData);
+    }
+
+    // If the user has previously liked the post, remove the like
+    if (likeDocSnap.exists()) {
+      await deleteDoc(likeDoc);
+
+      // Update likes count
+      if (postIndex !== -1) {
+        const newData = [...data];
+        newData[postIndex].likesCount--;
+        setData(newData);
+      }
     }
   } else {
     await deleteDoc(dislikeDoc);
@@ -257,6 +286,7 @@ const handleDislike = async (postId) => {
     }
   }
 };
+
 
     return (
       <div className='Container'>
@@ -479,8 +509,13 @@ const handleDislike = async (postId) => {
     {data.map((Post) => (
       <div key={Post.id} className='post'>
         <div className='post-details'>
-          <p className='posted-by'>{Post.PostedBy}</p>
-          <p className='post-text'>{Post.text}</p>
+          <div className='groupImagePostBy'>
+            <img className='post-image' src={Post.userImage} alt='Posted' />
+                            
+              <p className='posted-by'>{Post.PostedBy}</p>
+          </div>
+          <p className='Post-text'>{Post.text}</p>
+           {Post.img && <img src={Post.img} alt='Posted' className='posted-image' />}
         </div>
             <div className='like-dislike'>
                   <button className='lik' onClick={() => handleLike(Post.id)}>
@@ -490,14 +525,19 @@ const handleDislike = async (postId) => {
                   <span role='img' aria-label='Dislike' >👎</span> {Post.dislikesCount}
                   </button>
             </div>
-        {Post.img && <img src={Post.img} alt='Posted' className='posted-image' />}
+       
         <input onKeyDown={(e) => add2(e, Post)} placeholder='Comment' className='input1' />
         
         {Post.comments && (
           <div className='comments'>
             {Post.comments.map((comment,id) => (
               <div key={id} className='comment'>
-                <p className='commented-by'>{comment.PostedBy}</p>
+                <div className='commentImmage'>    
+                  <img src={comment.userImage} alt='Commenter' className='comment-image' /> 
+                  <p className='commented-by'>{comment.PostedBy}</p>
+                </div>
+            
+                
                 <p className='comment-text'>{comment.text}</p>
               </div>
             ))}

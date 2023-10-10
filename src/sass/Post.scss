@@ -165,14 +165,44 @@
   align-items: center;
   flex-direction: column;
   margin-bottom: 10px;
+  margin-left: 20px;
+  
+   
 }
+.post-image {
 
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  object-fit: cover;
+  cursor: pointer;
+  display: flex;
+
+}
+.comment-image {
+
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  object-fit: cover;
+  cursor: pointer;
+  display: flex;
+  margin-bottom: 10px;
+
+}
+.groupImagePostBy{
+  display: flex;
+  flex-direction: row;
+  margin-top: 20px;
+  margin-left: -300px;
+}
 .posted-by {
   font-weight: bold;
-  margin-right: 10px;
+  margin-left: 20px;
   font-size: 14px;
   color: #333;
-  margin: 0;
+  // margin-top: 10px;
+  // margin: 0;
 }
 .lik{
   position: relative;
@@ -182,65 +212,74 @@
   position: relative;
   left: 300px;
 }
-.post-text {
-  font-size: 20px;
-  margin: 5px 0;
+.Post-text {
+  font-size: 15px;
+  margin-top: 30px;
   line-height: 1.4;
   color: #333333;
-  position: relative;
   left: 0px;
+  max-width: 100%;
+  overflow: hidden;
+  word-wrap: break-word;
+
 }
 
-.post-text:before {
-  content: open-quote;
+.Post-text:before {
+  // content: open-quote;
   font-size: 24px;
   margin-right: 5px;
   vertical-align: middle;
+  
 }
 
-.post-text:after {
-  content: close-quote;
+.Post-text:after {
+  // content: close-quote;
   font-size: 24px;
   margin-left: 5px;
   vertical-align: middle;
+  
 }
 
-.post-text em {
+.Post-text em {
   font-style: italic;
   color: #e74c3c;
 }
 
-.post-text strong {
+.Post-text strong {
   font-weight: bold;
 }
 
-.post-text a {
+.Post-text a {
   color: #3498db;
-  text-decoration: underline;
+   text-decoration: underline;
 }
 
-.post-text a:hover {
+.Post-text a:hover {
   color: #2980b9;
   text-decoration: none;
+  
 }
 
-.post-text ul,
-.post-text ol {
+.Post-text ul,
+.Post-text ol {
   padding-left: 20px;
 }
 
-.post-text li {
+.Post-text li {
   margin-bottom: 5px;
 }
 
-.post-text img {
+.Post-text img {
   max-width: 100%;
   border-radius: 5px;
   margin-top: 10px;
 }
 
 
-
+.commentImmage{
+  display: flex;
+  flex-direction: row;
+}
 .posted-image {
   width: 100%;
   max-height: 400px;
@@ -272,11 +311,7 @@ button {
 button:hover {
   background-color: #045387;
 }
-.posted-image {
-  max-width: 100%;
-  border-radius: 5px;
-  margin-bottom: 10px;
-}
+
 .input1 {
   width: 100%;
   padding: 5px;
@@ -295,14 +330,15 @@ button:hover {
   margin-top: 10px;
   padding-top: 10px;
   border-top: 1px solid #ccc;
+  margin-left: 20px;
 }
 
 .commented-by {
   font-weight: bold;
-  margin-right: 10px;
+  margin-left: 20px;
   font-size: 14px;
   color: #000000;
-  margin: 0;
+  margin-top: 15px;
 }
 
 .comment-text {
