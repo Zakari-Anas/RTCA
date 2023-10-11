@@ -6,7 +6,19 @@
     padding: 20px;
     background-image: linear-gradient(180deg, hwb(0 0% 100%) 0%, #8f94fb 100%);
   }
-  
+  .posted-by {
+  font-weight: bold;
+  margin-left: 20px;
+  font-size: 14px;
+  color: #333;
+  cursor: pointer;
+  transition: color 0.3s, text-decoration 0.3s; /* Add a smooth transition effect */
+}
+
+.posted-by:hover {
+
+  text-decoration: underline; /* Underline the text on hover */
+}
   .profile-header {
     text-align: center;
     padding: 20px 0;
@@ -36,7 +48,12 @@
     font-size: 18px;
     color: #888;
   }
-  
+  .GroupImagePostBy{
+  display: flex;
+  flex-direction: row;
+  margin-top: 20px;
+  margin-left: -550px;
+}
   .profile-content {
     // background-image: linear-gradient(180deg, hwb(0 0% 100%) 0%, #8f94fb 100%);
     border-radius: 8px;

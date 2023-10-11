@@ -180,7 +180,7 @@ const handleDislike = async (postId) => {
         {posts.length > 0 ? (posts.map((Post) => (
       <div key={Post.id} className='post'>
         <div className='post-details'>
-          <div className='groupImagePostBy'>
+          <div className='GroupImagePostBy'>
             <img className='post-image' src={Post.userImage} alt='Posted' />
                             
               <p className='posted-by'>{Post.PostedBy}</p>

@@ -148,6 +148,7 @@
           id: postId,
           userImage: auth.currentUser.photoURL,
           PostedBy: auth.currentUser.displayName,
+          UserId: auth.currentUser.uid,
           text: inputValue,
           img: downloadURL,
         });
@@ -186,6 +187,7 @@
         id: Post.id,
         userImage: auth.currentUser.photoURL,
         PostedBy: auth.currentUser.displayName,
+        UserId: auth.currentUser.uid,
         text: commentText,
         img: '',
       });
@@ -512,7 +514,7 @@ const handleDislike = async (postId) => {
           <div className='groupImagePostBy'>
             <img className='post-image' src={Post.userImage} alt='Posted' />
                             
-              <p className='posted-by'>{Post.PostedBy}</p>
+              <p className='Posted-by'>{Post.PostedBy}</p>
           </div>
           <p className='Post-text'>{Post.text}</p>
            {Post.img && <img src={Post.img} alt='Posted' className='posted-image' />}
