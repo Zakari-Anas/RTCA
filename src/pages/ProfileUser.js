@@ -1,57 +1,19 @@
-import React, { useState } from 'react';
-import '../sass/Profile.scss';
-import { auth, db } from '../Firebase';
-import { useEffect } from 'react';
 import { collection, deleteDoc, doc, getDoc, getDocs, query, setDoc, where } from 'firebase/firestore';
+import React, { useEffect, useState } from 'react'
+import { useParams } from 'react-router-dom'
+import { auth, db } from '../Firebase';
 import {v4 as uuid} from 'uuid';
-import { color } from 'framer-motion';
-function Profil() {
-  const [posts, setPosts] = useState([]);
-  // const [newPost, setNewPost] = useState('');
+function ProfileUser() {
+     const { id } = useParams(); // Use useParams as a function to get the 'id' parameter
   const [user, setUser] = useState({});
-      useEffect (()=>{
-            const getPosts = async () => {
-              if(auth.currentUser){
-                 const docRef = collection(db, 'Posts');
-                const spes=query(docRef, where('PostedBy', '==', auth.currentUser.displayName));
-                const docSnap = await getDocs(spes);
-                const PosData = [];
-                 for (const doc of docSnap.docs) {
-                    const postData = doc.data();
-                    
-                    // Query comments for the current post using the 'postId' field
-                    const commentsRef = collection(db, 'Comments');
-                    const commentsQuery = query(commentsRef, where('id', '==', postData.id));
-                    const commentsSnap = await getDocs(commentsQuery);
-                    const commentsData = commentsSnap.docs.map((commentDoc) => commentDoc.data());
-                    postData.comments = commentsData;
-                        // Query likes and dislikes count for the current post
-                    const likesRef = collection(db, `Posts/${postData.id}/likes`);
-                    const dislikesRef = collection(db, `Posts/${postData.id}/dislikes`);
-
-                    const likesSnap = await getDocs(likesRef);
-                    const dislikesSnap = await getDocs(dislikesRef);
-
-                    postData.likesCount = likesSnap.size;
-                    postData.dislikesCount = dislikesSnap.size;
-                    PosData.push(postData);
-                }
-
-                  setPosts(PosData);
-              }
-       
-
-       
-      };
-        getPosts();
-      },[posts])
+  const [posts, setPosts] = useState([]); // Initialize the 'posts' state variable as an empty array
 
  useEffect(() => {
     const getData = async () => {
       try {
         const commentsData = [];
         const commentsRef = collection(db, 'USERS');
-        const commentsQuery = query(commentsRef, where('Id', '==', auth.currentUser.uid));
+        const commentsQuery = query(commentsRef, where('Id', '==', id));
         const commentsSnap = await getDocs(commentsQuery);
 
         commentsSnap.forEach((doc) => {
@@ -64,8 +26,45 @@ function Profil() {
       }
     };
     getData();
-  }, [auth.currentUser.uid]); // Fetch user data once 'id' changes
+  }, [id]); // Fetch user data once 'id' changes
 
+  useEffect(() => {
+    // Check if user data is available before querying posts
+    if (user.displayName) {
+      const getPosts = async () => {
+        if (auth.currentUser) {
+          const docRef = collection(db, 'Posts');
+          const spes = query(docRef, where('PostedBy', '==', user.displayName));
+          const docSnap = await getDocs(spes);
+          const PosData = [];
+          for (const doc of docSnap.docs) {
+            const postData = doc.data();
+
+            // Query comments for the current post using the 'postId' field
+            const commentsRef = collection(db, 'Comments');
+            const commentsQuery = query(commentsRef, where('id', '==', postData.id));
+            const commentsSnap = await getDocs(commentsQuery);
+            const commentsData = commentsSnap.docs.map((commentDoc) => commentDoc.data());
+            postData.comments = commentsData;
+
+            // Query likes and dislikes count for the current post
+            const likesRef = collection(db, `Posts/${postData.id}/likes`);
+            const dislikesRef = collection(db, `Posts/${postData.id}/dislikes`);
+
+            const likesSnap = await getDocs(likesRef);
+            const dislikesSnap = await getDocs(dislikesRef);
+
+            postData.likesCount = likesSnap.size;
+            postData.dislikesCount = dislikesSnap.size;
+            PosData.push(postData);
+          }
+
+          setPosts(PosData);
+        }
+      };
+      getPosts();
+    }
+  }, [user]);
 const handleLike = async (postId) => {
   const userId = auth.currentUser.uid;
   const postRef = doc(db, 'Posts', postId);
@@ -180,16 +179,17 @@ const handleDislike = async (postId) => {
       });
     }
   };
-
   
-  return (
-    <div className='profile-container'>
+    return (
+
+<div className='profile-container'>
+  {console.log(user)}
       {/* {console.log(posts)} */}
       <div className='profile-header'>
         <img className='profile-cover' src='https://placekitten.com/1500/300' alt='Cover' />
-        <img className='profile-picture' src={auth.currentUser? auth.currentUser.photoURL: ''} alt='Profile' />
+        <img className='profile-picture' src={user.PhotoURL} alt='Profile' />
         <div className='profile-info'>
-          <h1>{auth.currentUser? auth.currentUser.displayName:"John Doe"}</h1>
+          <h1>{user? user.displayName:"John Doe"}</h1>
           {/* <p>Web Developer</p> */}
         </div>
       </div>
@@ -243,7 +243,10 @@ const handleDislike = async (postId) => {
         </div>
       </div>
     </div>
-  );
+     
+   
+    )
+
 }
 
-export default Profil;
+export default ProfileUser;

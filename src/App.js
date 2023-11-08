@@ -9,6 +9,7 @@ import SignUp from './pages/SignUp';
 import Home from './pages/Home';
 import Posts from './pages/Posts';
 import Profil from './pages/profil';
+import ProfileUser from './pages/ProfileUser';
 import './App.css';
 import { collection, doc, getDoc, getDocs, query, updateDoc, where } from 'firebase/firestore';
 let sessionStartTime = null;
@@ -21,34 +22,46 @@ function App() {
         const [hours, setHours] = useState(0);
       //  const [sessionStartTime , setSessionStartTime] = useState(null);
 
-          useEffect(() => {
-            if (auth.currentUser ) {
-              const interval = setInterval(() => {
-                setSeconds((prevSeconds) => prevSeconds + 1);
-              }, 1000);
+        useEffect(() => {
+          // Load previous session time from localStorage
+          if(auth.currentUser){
+            const previousSessionTime = localStorage.getItem('sessionTime');
+          if (previousSessionTime) {
+            const [prevHours, prevMinutes, prevSeconds] = previousSessionTime.split(':');
+            setHours(parseInt(prevHours));
+            setMinutes(parseInt(prevMinutes));
+            setSeconds(parseInt(prevSeconds));
+          }
 
-              return () => clearInterval(interval);
-            } else {
+          // Start the timer
+          const interval = setInterval(() => {
+            setSeconds((prevSeconds) => prevSeconds + 1);
+          }, 1000);
+
+          return () => {
+            clearInterval(interval);
+          };
+          }
           
-            }
-          }, [auth.currentUser]);
+        }, [auth.currentUser]);
 
-          useEffect(() => {
-            
-            if (auth.currentUser && seconds === 60) {
-              setSeconds(0);
-              setMinutes((prevMinutes) => prevMinutes + 1);
-            }
-            if (auth.currentUser && minutes === 60) {
-              setMinutes(0);
-              setHours((prevHours) => prevHours + 1);
-            }
+        useEffect(() => {
+          if (seconds === 60) {
+            setSeconds(0);
+            setMinutes((prevMinutes) => prevMinutes + 1);
+          }
+          if (minutes === 60) {
+            setMinutes(0);
+            setHours((prevHours) => prevHours + 1);
+          }
 
-          }, [auth.currentUser, seconds, minutes, hours]);
+          // Save the current session time to localStorage
+          const currentSessionTime = `${hours}:${minutes}:${seconds}`;
+          localStorage.setItem('sessionTime', currentSessionTime);
+        }, [seconds, minutes, hours]);
 
-        sessionStartTime= `${hours}:${minutes}:${seconds}`;
-        console.log(sessionStartTime);
-
+        console.log(`${hours}:${minutes}:${seconds}`)
+       
 
  const signOutUser = async (e) => {
   // Calculate the total session time in seconds
@@ -85,9 +98,10 @@ function App() {
       online: false,
       'Time spent': newTimeSpent,
     });
-      setSeconds(0);
-      setMinutes(0);
-      setHours(0);
+       localStorage.removeItem('sessionTime');
+          setHours(0);
+          setMinutes(0);
+          setSeconds(0);
 
     // Sign out the user
     await signOut(auth);
@@ -117,7 +131,8 @@ function App() {
           <Route path='/home' element={auth.currentUser ? <Home /> : <Login />} />
           <Route path='/logout' element={<Login />} />
           <Route path='/Post' element={auth.currentUser ? <Posts /> : <Login />} />
-          <Route path='/profil' element={<Profil/>}/>
+          <Route path='/profil' element={auth.currentUser ? <Profil/> : <Login />}/>
+          <Route path='/profileUser/:id' element={auth.currentUser ? <ProfileUser/> : <Login />}/>
         </Routes>
       </Router>
     </div>

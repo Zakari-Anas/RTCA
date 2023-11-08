@@ -7,11 +7,13 @@
   import { db } from '../Firebase';
   import {v4 as uuid} from 'uuid';
   import { getDownloadURL, ref, uploadBytesResumable } from 'firebase/storage'
+import { Navigate, useNavigate } from 'react-router-dom';
   // import { faLaughSquint } from '@fortawesome/free-solid-svg-icons';
 
 
 
   function Posts() {
+    const navigate=useNavigate();
     const [cameraStream, setCameraStream] = useState(null);
     const [selectedFile, setSelectedFile] = useState(null);
     const [isVideoPlaying, setIsVideoPlaying] = useState(false);
@@ -164,6 +166,7 @@
       id: postId,
       userImage: auth.currentUser.photoURL,
       PostedBy: auth.currentUser.displayName,
+      UserId: auth.currentUser.uid,
       text: inputValue, 
       img: "",
     });
@@ -289,7 +292,12 @@ const handleDislike = async (postId) => {
   }
 };
 
-
+const GoToProfileUser=(id)=>{
+  navigate('/profileUser/'+id);
+}
+const NavigateTouserSPost = (id) => {
+  navigate('/profileUser/'+id);
+}
     return (
       <div className='Container'>
           <form className='Form-Container' type='submit'>
@@ -514,7 +522,7 @@ const handleDislike = async (postId) => {
           <div className='groupImagePostBy'>
             <img className='post-image' src={Post.userImage} alt='Posted' />
                             
-              <p className='Posted-by'>{Post.PostedBy}</p>
+              <p className='Posted-by' onClick={()=>{NavigateTouserSPost(Post.UserId)}}>{Post.PostedBy}</p>
           </div>
           <p className='Post-text'>{Post.text}</p>
            {Post.img && <img src={Post.img} alt='Posted' className='posted-image' />}
@@ -536,7 +544,7 @@ const handleDislike = async (postId) => {
               <div key={id} className='comment'>
                 <div className='commentImmage'>    
                   <img src={comment.userImage} alt='Commenter' className='comment-image' /> 
-                  <p className='commented-by'>{comment.PostedBy}</p>
+                  <p className='commented-by' onClick={()=>{GoToProfileUser(comment.UserId)}}>{comment.PostedBy}</p>
                 </div>
             
                 
