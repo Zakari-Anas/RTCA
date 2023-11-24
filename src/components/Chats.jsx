@@ -6,7 +6,8 @@ import { db } from '../Firebase';
 import { AuthContext } from '../context/authContext';
 import { auth } from '../Firebase';
 import { ChatContext } from '../context/ChatContext';
-
+import connected from '../images/png-transparent-green-dot-corporation-business-cercle-de-fermieres-d-ahuntsic-thumbnail.png'
+import disconneted from '../images/téléchargé.png'
 function Chats() {
   const [chats, setChats] = useState([]);
   const { dispatch } = useContext(ChatContext);
@@ -67,14 +68,17 @@ return (
             <img src={chatData.UserInfo.photoURL} alt='User Avatar' />
           )}
           <div className='userChatInfo'>
-            <span>{chatData.UserInfo && chatData.UserInfo.displayName}</span>
-            <p>{chatData.lastMessage?.text}</p>
+            <span style={NameStyle} >{chatData.UserInfo && chatData.UserInfo.displayName}</span>
+            {/* <span>{chatData.Date}</span> */}
             {chatData.UserInfo && userOnline.map((user,index) => {
               if (user.Id === chatData.UserInfo.uid && user.online === true) {
-                return <p key={index}>Connected</p>;
+                // return <p key={index}>Connected</p>;
+                return <img src={connected} style={dotStyle}  />
+
+
               }
               if (user.Id === chatData.UserInfo.uid && user.online === false) {
-                return <p key={index}>Not Connected</p>;
+                 return <img src={disconneted} style={dotStyle}  />
               }
               return null;
             })}
@@ -86,5 +90,21 @@ return (
 );
 
 }
+const dotStyle = {
+  width: '15px',
+  height: '15px',
+  borderRadius: '50%',
+  backgroundColor: 'green',
+  marginTop: '5px',
+  marginLeft: '-40px', // Adjust this value to move the dot down
+};
 
+const NameStyle = {
+  width: '200px',
+  height: '20px',
+  // borderRadius: '50%',
+  // backgroundColor: 'green',
+  marginTop: '15px',
+  // marginLeft: '-40px', // Adjust this value to move the dot down
+};
 export default Chats;

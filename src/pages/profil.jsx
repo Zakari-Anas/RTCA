@@ -5,6 +5,7 @@ import { useEffect } from 'react';
 import { collection, deleteDoc, doc, getDoc, getDocs, query, setDoc, where } from 'firebase/firestore';
 import {v4 as uuid} from 'uuid';
 import { color } from 'framer-motion';
+import geerd from '../images/geerd_white_logo_dark_background_cwsft8.png'
 function Profil() {
   const [posts, setPosts] = useState([]);
   // const [newPost, setNewPost] = useState('');
@@ -186,7 +187,7 @@ const handleDislike = async (postId) => {
     <div className='profile-container'>
       {/* {console.log(posts)} */}
       <div className='profile-header'>
-        <img className='profile-cover' src='https://placekitten.com/1500/300' alt='Cover' />
+        <img className='profile-cover' src={geerd} alt='Cover' />
         <img className='profile-picture' src={auth.currentUser? auth.currentUser.photoURL: ''} alt='Profile' />
         <div className='profile-info'>
           <h1>{auth.currentUser? auth.currentUser.displayName:"John Doe"}</h1>
@@ -194,7 +195,7 @@ const handleDislike = async (postId) => {
         </div>
       </div>
       <div className='profile-content'>
-        <h1 style={{color:"white"}}>{user? user["Time spent"]:"John Doe"}</h1>
+         <p style={{color:"white"}}>Connection Time : {user? user["Time spent"]:""}</p>
         <div className='posts'>
         {posts.length > 0 ? (posts.map((Post) => (
       <div key={Post.id} className='post'>

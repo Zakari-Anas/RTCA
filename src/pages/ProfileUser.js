@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { auth, db } from '../Firebase';
 import {v4 as uuid} from 'uuid';
+import geerd from '../images/geerd_white_logo_dark_background_cwsft8.png'
 function ProfileUser() {
      const { id } = useParams(); // Use useParams as a function to get the 'id' parameter
   const [user, setUser] = useState({});
@@ -186,7 +187,7 @@ const handleDislike = async (postId) => {
   {console.log(user)}
       {/* {console.log(posts)} */}
       <div className='profile-header'>
-        <img className='profile-cover' src='https://placekitten.com/1500/300' alt='Cover' />
+        <img className='profile-cover' src={geerd} alt='Cover' />
         <img className='profile-picture' src={user.PhotoURL} alt='Profile' />
         <div className='profile-info'>
           <h1>{user? user.displayName:"John Doe"}</h1>
@@ -194,7 +195,7 @@ const handleDislike = async (postId) => {
         </div>
       </div>
       <div className='profile-content'>
-        <h1 style={{color:"white"}}>{user? user["Time spent"]:"John Doe"}</h1>
+        <p style={{color:"white"}}>Connection Time : {user? user["Time spent"]:""}</p>
         <div className='posts'>
         {posts.length > 0 ? (posts.map((Post) => (
       <div key={Post.id} className='post'>
@@ -237,7 +238,7 @@ const handleDislike = async (postId) => {
       
     )) ) : (
               <div>
-                  <p>you have no Posts</p>
+                  <p>This user has no Posts</p>
               </div>   
     )}
         </div>

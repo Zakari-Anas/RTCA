@@ -111,7 +111,7 @@ const handleSubmit = async (e) => {
                             placeholder='Password'
                         />
                         <input onChange={(e) => setConfirmPassword(e.target.value)}
-                            type='password '
+                            type='password'
                             placeholder='Confirm Password'
                         />
                        <IntlTelInput  onPhoneNumberChange={(value, countryData, number, fullNumber) => {
